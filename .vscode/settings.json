@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+      "*.jsx": "javascriptreact"
+    },
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": true,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    }
+  }
