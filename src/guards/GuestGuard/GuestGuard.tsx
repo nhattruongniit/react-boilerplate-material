@@ -11,8 +11,6 @@ import { userSelector } from 'selectors/auth.selector';
 const GuestGuard: FC = ({ children }) => {
   const user = useSelector(userSelector);
 
-  console.log('guest guard', user);
-
   if (user) return <Redirect to={PATH_NAME.ROOT} />;
 
   return <>{children}</>;
