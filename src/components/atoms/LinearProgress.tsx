@@ -1,7 +1,12 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Backdrop from '@material-ui/core/Backdrop';
 import LinearProgress from '@material-ui/core/LinearProgress';
+
+// selectors
+import { isLoadingSelector } from 'selectors/app.selector';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,9 +30,10 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function DefaultPage() {
   const classes = useStyles();
+  const isLoading = useSelector(isLoadingSelector);
 
   return (
-    <Backdrop className={classes.backdrop} open>
+    <Backdrop className={classes.backdrop} open={isLoading}>
       <div className={classes.root}>
         <span>Loading...</span>
         <LinearProgress />

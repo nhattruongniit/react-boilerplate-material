@@ -33,9 +33,7 @@ export default function DialogError() {
           <TypographyBase variant="h4" text="Error" />
         </DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            Something went wrong from systems!  
-          </DialogContentText>
+          <DialogContentText>Something went wrong from systems!</DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary" autoFocus>

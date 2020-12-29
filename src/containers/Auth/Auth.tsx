@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 // services
 import authService from 'services/authService';
-
-// components
-import LinearProgress from 'components/atoms/LinearProgress';
 
 // actions
 import { setUserData } from 'actions/auth.action';
@@ -16,7 +13,6 @@ type IProps = {
 
 const Auth = ({ children }: IProps) => {
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     async function initAuth() {
@@ -26,14 +22,11 @@ const Auth = ({ children }: IProps) => {
         const user = await authService.loginWithToken();
         dispatch(setUserData(user));
       }
-      setIsLoading(false);
     }
     initAuth();
   }, [dispatch]);
 
-  if (isLoading) return <LinearProgress />;
-
-  return children;
+  return <>{children}</>;
 };
 
 export default Auth;

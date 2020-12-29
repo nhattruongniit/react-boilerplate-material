@@ -10,8 +10,10 @@ import { useGlobalContext } from 'context/GlobalContext';
 
 // containers
 import Auth from 'containers/Auth';
-import ProgressBar from 'containers/ProgressBar';
-import Dialog from 'containers/Dialog';
+
+// atomic
+import LinearProgress from 'components/atoms/LinearProgress';
+import Dialog from 'components/molecules/Dialog';
 
 // themes
 import themes from 'themes';
@@ -34,7 +36,7 @@ function App() {
     <MuiThemeProvider theme={themes(type)}>
       <Router>
         <Auth>
-          <ProgressBar />
+          <LinearProgress />
           <Dialog />
           <Routes />
         </Auth>
