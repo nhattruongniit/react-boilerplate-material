@@ -27,7 +27,7 @@ type IChildRoutes = {
   acc: any;
   curr: any;
   pathname: string;
-  depth?: number
+  depth?: number;
 };
 
 function NavBar({ isDrawer }: IProps) {
@@ -35,16 +35,12 @@ function NavBar({ isDrawer }: IProps) {
   const location = useLocation();
 
   const renderNavItems = ({ items, pathname, depth }: IChildNavBar) => {
-    return (
-      <List disablePadding>
-        {items?.reduce((acc, curr) => renderChildRoutes({ acc, curr, pathname, depth }), [])}
-      </List>
-    );
+    return <List disablePadding>{items?.reduce((acc, curr) => renderChildRoutes({ acc, curr, pathname, depth }), [])}</List>;
   };
 
   const renderChildRoutes = ({ acc, curr, pathname, depth = 0 }: IChildRoutes) => {
     const key = curr.title + depth;
-    
+
     if (curr.items) {
       const open = matchPath(pathname, {
         path: curr.href,
@@ -68,7 +64,6 @@ function NavBar({ isDrawer }: IProps) {
           })}
         </NavBarItem>,
       );
-      
     } else {
       acc.push(
         <NavBarItem
@@ -103,12 +98,7 @@ function NavBar({ isDrawer }: IProps) {
       <Divider />
       {navBarCommon.map((nav) => {
         return (
-          <List   
-            key={nav.subheader}
-            subheader={(
-              <ListSubheader disableSticky>{nav.subheader}</ListSubheader>
-            )}
-          >
+          <List key={nav.subheader} subheader={<ListSubheader disableSticky>{nav.subheader}</ListSubheader>}>
             {renderNavItems({ items: nav.items, pathname: location.pathname })}
           </List>
         );

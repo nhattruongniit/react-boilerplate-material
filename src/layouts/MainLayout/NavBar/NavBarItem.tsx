@@ -16,7 +16,7 @@ import NavBarExpandItem from './NavBarExpandItem';
 // styles
 import useStyles from './styles';
 
-const NavBarItem:FC<INavBarItem>= ({ depth, icon: Icon, title, open: openProp, href, isExternalLink = false, children }) => {
+const NavBarItem: FC<INavBarItem> = ({ depth, icon: Icon, title, open: openProp, href, isExternalLink = false, children }) => {
   const classes = useStyles();
 
   let paddingLeft = 24;
@@ -35,22 +35,11 @@ const NavBarItem:FC<INavBarItem>= ({ depth, icon: Icon, title, open: openProp, h
   }
 
   return (
-    <ListItem
-      className={clsx(classes.itemLeaf)}
-      disableGutters
-      key={title}
-    >
+    <ListItem className={clsx(classes.itemLeaf)} disableGutters key={title}>
       {isExternalLink ? (
         <Link href={href} target="_blank" style={style} className={clsx(classes.buttonLeaf, `depth-${depth}`)}>
-          {Icon && (
-            <Icon
-              className={classes.icon}
-              size="20"
-            />
-          )}
-          <span className={classes.title}>
-            {title}
-          </span>
+          {Icon && <Icon className={classes.icon} size="20" />}
+          <span className={classes.title}>{title}</span>
         </Link>
       ) : (
         <Button
@@ -61,18 +50,10 @@ const NavBarItem:FC<INavBarItem>= ({ depth, icon: Icon, title, open: openProp, h
           style={style}
           to={href}
         >
-          {Icon && (
-            <Icon
-              className={classes.icon}
-              size="20"
-            />
-          )}
-          <span className={classes.title}>
-            {title}
-          </span>
+          {Icon && <Icon className={classes.icon} size="20" />}
+          <span className={classes.title}>{title}</span>
         </Button>
       )}
-      
     </ListItem>
   );
 };

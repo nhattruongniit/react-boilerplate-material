@@ -26,7 +26,7 @@ const rows = [
   createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
 
-function SongList() {
+function ProductList() {
   const { page, perPage, _changePage, _changePerPage } = usePagination();
 
   useEffect(() => {
@@ -66,4 +66,4 @@ function SongList() {
   );
 }
 
-export default SongList;
+export default ProductList;

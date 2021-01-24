@@ -20,7 +20,7 @@ type IProps = {
   children: React.ReactNode;
 };
 
-export default function Dashboard({ children }: IProps) {
+export default function MainLayout({ children }: IProps) {
   const classes = useStyles();
   const [isDrawer, setIsDrawer] = useState(true);
 
@@ -42,9 +42,7 @@ export default function Dashboard({ children }: IProps) {
         })}
       >
         <div className={classes.toolbar} />
-        <ErrorBoundary>
-          {children}
-        </ErrorBoundary>
+        <ErrorBoundary>{children}</ErrorBoundary>
       </main>
     </div>
   );

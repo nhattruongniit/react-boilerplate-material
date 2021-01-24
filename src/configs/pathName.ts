@@ -3,9 +3,9 @@ export const PATH_NAME = {
   ERROR_404: '/404',
   PLAY_BACKGROUND: '/playbackground',
   LOGIN: '/login',
-  SONG: '/song',
-  SONG_ADD: '/song/add',
-  SONG_LISTS: '/song/lists',
-  ARTISTS: '/artist',
+  PRODUCT: '/product',
+  PRODUCT_LIST: '/product/list',
+  PRODUCT_ADD: '/product/add',
+  RAPPER: '/rapper',
   USERS: '/users',
 };

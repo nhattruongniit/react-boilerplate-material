@@ -8,7 +8,7 @@ import { PATH_NAME } from 'configs';
 import { IRoutes } from 'models/IRoutes';
 
 // layouts
-import Dashboard from 'layouts/Dashboard';
+import MainLayout from 'layouts/MainLayout';
 
 // containers
 import AuthGuard from 'guards/AuthGuard';
@@ -16,9 +16,9 @@ import GuestGuard from 'guards/GuestGuard';
 
 // modules
 const Error404View = lazy(() => import('features/Error404View'));
-const SongAdd = lazy(() => import('features/Song/SongAdd'));
-const SongList = lazy(() => import('features/Song/SongList'));
-const Artist = lazy(() => import('features/Artist'));
+const ProductAdd = lazy(() => import('features/Product/ProductAdd'));
+const ProductList = lazy(() => import('features/Product/ProductList'));
+const Rapper = lazy(() => import('features/Rapper'));
 const Users = lazy(() => import('features/Users'));
 const Playbackground = lazy(() => import('features/Playbackground'));
 const Login = lazy(() => import('features/Login'));
@@ -27,7 +27,7 @@ const routesConfig: IRoutes[] = [
   {
     exact: true,
     path: '/',
-    component: () => <Redirect to={PATH_NAME.SONG_LISTS} />,
+    component: () => <Redirect to={PATH_NAME.PRODUCT_LIST} />,
   },
   {
     exact: true,
@@ -43,7 +43,7 @@ const routesConfig: IRoutes[] = [
   {
     path: '/',
     guard: AuthGuard,
-    layout: Dashboard,
+    layout: MainLayout,
     routes: [
       {
         exact: true,
@@ -52,18 +52,18 @@ const routesConfig: IRoutes[] = [
       },
       {
         exact: true,
-        path: PATH_NAME.SONG_LISTS,
-        component: SongList,
+        path: PATH_NAME.PRODUCT_LIST,
+        component: ProductList,
       },
       {
         exact: true,
-        path: PATH_NAME.SONG_ADD,
-        component: SongAdd,
+        path: PATH_NAME.PRODUCT_ADD,
+        component: ProductAdd,
       },
       {
         exact: true,
-        path: PATH_NAME.ARTISTS,
-        component: Artist,
+        path: PATH_NAME.RAPPER,
+        component: Rapper,
       },
       {
         exact: true,
@@ -81,7 +81,7 @@ const routesConfig: IRoutes[] = [
       {
         exact: true,
         path: '/app',
-        component: Dashboard,
+        component: MainLayout,
       },
       {
         component: () => <Redirect to={PATH_NAME.ERROR_404} />,

@@ -25,34 +25,13 @@ function NavBarExpandItem({ title, icon: Icon, open = false, children, style }: 
   };
 
   return (
-    <ListItem
-      className={clsx(classes.item)}
-      disableGutters
-      key={title}
-    >
-      <Button
-        className={classes.button}
-        onClick={handleToggle}
-        style={style}
-      >
-        {Icon && (
-          <Icon
-            className={classes.icon}
-            size="20"
-          />
-        )}
-        <span className={classes.title}>
-          {title}
-        </span>
-        {isExpand ? (
-          <ExpandLessIcon />
-        ) : (
-          <ExpandMoreIcon />
-        )}
+    <ListItem className={clsx(classes.item)} disableGutters key={title}>
+      <Button className={classes.button} onClick={handleToggle} style={style}>
+        {Icon && <Icon className={classes.icon} size="20" />}
+        <span className={classes.title}>{title}</span>
+        {isExpand ? <ExpandLessIcon /> : <ExpandMoreIcon />}
       </Button>
-      <Collapse in={isExpand}>
-        {children}
-      </Collapse>
+      <Collapse in={isExpand}>{children}</Collapse>
     </ListItem>
   );
 }

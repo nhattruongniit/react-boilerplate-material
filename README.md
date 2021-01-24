@@ -13,7 +13,8 @@
 - i18n
 - dark mode
 - react error boundary
-- axios interceptor, cancel request
+- axios interceptor
+- cancel request
 - authentication guards
 
 ### Testing
