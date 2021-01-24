@@ -7,6 +7,11 @@ const initialState: IAppState = {
     isShow: false,
     content: '',
   },
+  snackbar: {
+    type: 'error',
+    isShow: false,
+    content: '',
+  },
 };
 
 const reducer = (state = initialState, { type, payload }: IAppActionCreator) => {
@@ -23,6 +28,15 @@ const reducer = (state = initialState, { type, payload }: IAppActionCreator) => 
           type: payload.dialog.type,
           isShow: payload.dialog.isShow,
           content: payload.dialog.content,
+        },
+      };
+    case IAppActionTypes.SET_SNACKBAR:
+      return {
+        ...state,
+        snackbar: {
+          type: payload.type,
+          isShow: payload.isShow,
+          content: payload.content,
         },
       };
     default:

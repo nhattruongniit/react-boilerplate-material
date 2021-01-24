@@ -9,3 +9,7 @@ type ICommon = {
 export type IRoutes = ICommon & {
   routes?: ICommon[];
 };
+
+export type IParams = {
+  id?: string;
+};

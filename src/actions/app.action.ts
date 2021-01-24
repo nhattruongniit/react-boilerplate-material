@@ -1,4 +1,4 @@
-import { IAppActionTypes } from 'models/IAppState';
+import { IAppActionTypes, ISnackBar } from 'models/IAppState';
 
 export const setLoading = (isLoading: boolean) => ({
   type: IAppActionTypes.SET_LOADING,
@@ -13,5 +13,14 @@ export const setDialog = (isShow: boolean, type: string = 'error', content: Reac
       isShow,
       content,
     },
+  },
+});
+
+export const setSnackBar = ({ isShow = false, type = 'success', content = 'This is a success!' }: ISnackBar) => ({
+  type: IAppActionTypes.SET_SNACKBAR,
+  payload: {
+    type,
+    isShow,
+    content,
   },
 });

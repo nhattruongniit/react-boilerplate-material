@@ -14,6 +14,7 @@ import Auth from 'containers/Auth';
 // atomic
 import LinearProgress from 'components/atoms/LinearProgress';
 import Dialog from 'components/molecules/Dialog';
+import SnackBarBase from 'components/molecules/SnackBarBase';
 
 // themes
 import themes from 'themes';
@@ -39,6 +40,7 @@ function App() {
           <LinearProgress />
           <Dialog />
           <Routes />
+          <SnackBarBase />
         </Auth>
       </Router>
     </MuiThemeProvider>

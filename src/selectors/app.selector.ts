@@ -12,3 +12,8 @@ export const dialogSelector = createSelector(
   (state: IRootState) => state.app,
   (app) => app.dialog,
 );
+
+export const snackbarSelector = createSelector(
+  (state: IRootState) => state.app,
+  (app) => app.snackbar,
+);
