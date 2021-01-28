@@ -8,7 +8,7 @@ class AuthService {
   };
 
   loginWithAuth0 = async (username: string) => {
-    const accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9';
+    const accessToken = '1929312831903129321';
     this.setSession(accessToken);
     return {
       user: username,

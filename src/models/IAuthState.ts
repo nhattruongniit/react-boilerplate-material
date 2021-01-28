@@ -8,7 +8,7 @@ export enum IAuthActionTypes {
 }
 
 export type IAuthState = {
-  user: null;
+  user: string | null;
 };
 
 export type IAuthActionCreator = {

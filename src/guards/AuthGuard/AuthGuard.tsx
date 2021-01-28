@@ -1,17 +1,16 @@
 import React, { FC } from 'react';
-import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
 
 // configs
 import { PATH_NAME } from 'configs';
 
-// selectors
-import { userSelector } from 'selectors/auth.selector';
+// services
+import authService from 'services/authService';
 
 const AuthGuard: FC = ({ children }) => {
-  const user = useSelector(userSelector);
+  const isAuth = authService.isAuthenticated();
 
-  if (!user) return <Redirect to={PATH_NAME.LOGIN} />;
+  if (!isAuth) return <Redirect to={PATH_NAME.LOGIN} />;
 
   return <>{children}</>;
 };

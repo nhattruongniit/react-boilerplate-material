@@ -1,7 +1,7 @@
 import { IAuthActionTypes, IAuthActionCreator, IAuthState } from 'models/IAuthState';
 
 const initialState: IAuthState = {
-  user: null,
+  user: '',
 };
 
 const reducer = (state = initialState, { type, payload }: IAuthActionCreator) => {

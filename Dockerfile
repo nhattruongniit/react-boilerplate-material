@@ -1,19 +1,32 @@
-FROM node:14.15.1-alpine as builder
+# stage0
+FROM node:14.15.1-alpine AS build-stage
+USER root
+RUN npm -g install serve
+RUN rm -rf /home/node/app
+RUN mkdir /home/node/app
+WORKDIR /home/node/app
+COPY . /home/node/app
 
-WORKDIR /opt/web
-COPY package.json package-lock.json ./
+RUN cd /home/node/app
 RUN npm install
-
-ENV PATH="./node_modules/.bin:$PATH"
-
-COPY . ./
 RUN npm run build
+RUN chown -R root:root /home/node/app/build
+RUN ls -la /home/node/app/build
 
-FROM nginx:1.17-alpine
-RUN apk --no-cache add curl
-RUN curl -L https://github.com/a8m/envsubst/releases/download/v1.1.0/envsubst-`uname -s`-`uname -m` -o envsubst && \
-  chmod +x envsubst && \
-  mv envsubst /usr/local/bin
-COPY ./.nginx/nginx.conf /etc/nginx/nginx.template
-CMD ["/bin/sh", "-c", "envsubst < /etc/nginx/nginx.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
-COPY --from=builder /opt/web/build /usr/share/nginx/html
+# stage1
+FROM nginx:alpine AS RUN-stage
+USER root
+
+## Remove default nginx index page
+RUN rm -rf /usr/share/nginx/html
+
+# Copy from the stage 1
+COPY --from=build-stage /home/node/app/build /usr/share/nginx/html
+COPY --from=build-stage` /home/node/app/.nginx/nginx.conf /etc/nginx/conf.d/default.conf
+
+# COPY nginx/nginx.conf /etc/nginx/conf.d
+EXPOSE 80
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
+
+# start app 
+# CMD ["npm", "start"]
