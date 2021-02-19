@@ -10,9 +10,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
-// components
-import TypographyBase from 'components/atoms/TypographyBase';
+import Typography from '@material-ui/core/Typography';
 
 type IProps = {
   children: React.ReactNode;
@@ -58,7 +56,7 @@ const DefaultPage: FC<IProps> = ({ children }) => {
     return (
       <Dialog onClose={resetErrorBoundary} fullWidth open>
         <DialogTitle>
-          <TypographyBase variant="h4" text="Error" />
+          <Typography variant="h4">Error</Typography>
         </DialogTitle>
         <DialogContent>
           <DialogContentText>Something went wrong!</DialogContentText>
@@ -73,7 +71,11 @@ const DefaultPage: FC<IProps> = ({ children }) => {
   }
 
   return (
-    <ErrorBoundary resetKeys={[boundaryKey]} FallbackComponent={ErrorFallbackUI} onReset={() => setBoundaryKey((prev) => prev + 1)}>
+    <ErrorBoundary
+      resetKeys={[boundaryKey]}
+      FallbackComponent={ErrorFallbackUI}
+      onReset={() => setBoundaryKey((prev) => prev + 1)}
+    >
       {children}
     </ErrorBoundary>
   );
