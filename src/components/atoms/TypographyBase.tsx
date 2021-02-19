@@ -1,20 +1,76 @@
-import React from 'react';
+import React, { FC } from 'react';
+import clsx from 'clsx';
 
 // material core
-import { Typography, TypographyProps } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 
-type IProps = TypographyProps & {
-  variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'subtitle1' | 'subtitle2' | 'body1' | 'body2' | 'caption';
-  color?: 'initial' | 'inherit' | 'primary' | 'secondary' | 'textPrimary' | 'textSecondary' | 'error';
-  component?: 'div' | 'a' | 'p' | 'span';
-  text?: string;
+type IStyles = {
+  fontSize?: string;
+  fontWeight?: 'normal' | 'bold';
 };
 
-const TypographyBase = ({ variant = 'subtitle2', color = 'textSecondary', component = 'div', text }: IProps) => {
+type IProps = IStyles & {
+  color?:
+    | 'primary'
+    | 'secondary'
+    | 'textPrimary'
+    | 'textSecondary'
+    | 'lightOrange'
+    | 'textPrimaryBlue'
+    | 'textLightBlue'
+    | 'textReview'
+    | 'secondaryOpacity'
+    | 'disabledOpacity'
+    | undefined;
+  component?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div' | 'a' | 'p' | 'span' | 'caption';
+  className?: {};
+};
+
+const useStyles = (props: IStyles) =>
+  makeStyles((theme: Theme) => ({
+    typography: {
+      fontSize: props.fontSize,
+      fontWeight: props.fontWeight,
+      wordBreak: 'break-word',
+      whiteSpace: 'pre-wrap',
+    },
+    primary: {
+      color: theme.palette.primary.main,
+    },
+    secondary: {
+      color: theme.palette.secondary.main,
+    },
+    textPrimary: {
+      color: theme.palette.text.primary,
+    },
+    textSecondary: {
+      color: theme.palette.text.secondary,
+    },
+  }));
+
+const TypographyBase: FC<IProps> = ({
+  color,
+  component: Component = 'span',
+  fontSize = '14px',
+  children,
+  className,
+  fontWeight = 'normal',
+}) => {
+  const classes = useStyles({ fontSize, fontWeight })();
+
   return (
-    <Typography variant={variant} color={color} component={component}>
-      {text}
-    </Typography>
+    <Component
+      className={clsx(
+        className,
+        classes.typography,
+        color === 'textPrimary' && classes.textPrimary,
+        color === 'textSecondary' && classes.textSecondary,
+        color === 'primary' && classes.primary,
+        color === 'secondary' && classes.secondary,
+      )}
+    >
+      {children}
+    </Component>
   );
 };
 

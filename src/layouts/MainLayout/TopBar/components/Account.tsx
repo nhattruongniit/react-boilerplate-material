@@ -1,5 +1,5 @@
 import React, { useState, memo } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { useTranslation } from 'react-i18next';
 
@@ -17,11 +17,15 @@ import { PATH_NAME } from 'configs';
 // actions
 import { logout } from 'actions/auth.action';
 
+// selctor
+import { userSelector } from 'selectors/auth.selector';
+
 function Account({ ...classes }) {
   const { t: translate } = useTranslation();
   const dispatch = useDispatch();
   const history = useHistory();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const user = useSelector(userSelector);
 
   const _handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -63,7 +67,7 @@ function Account({ ...classes }) {
         open={Boolean(anchorEl)}
         onClose={_handleClose}
       >
-        <MenuItem className={classes.menuProfile}>Tony Nguyen</MenuItem>
+        <MenuItem className={classes.menuProfile}>{user}</MenuItem>
         <MenuItem className={classes.menuProfile} onClick={_handleLogout}>
           {translate('LOGOUT')}
         </MenuItem>

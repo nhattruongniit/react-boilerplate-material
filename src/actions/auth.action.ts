@@ -2,15 +2,20 @@ import { Dispatch } from 'redux';
 
 // types
 import { IAuthActionTypes } from 'models/IAuthState';
+import { IHistory } from 'models/ICommon';
 
 // services
 import authService from 'services/authService';
 
-export const login = (username: string) => async (dispatch: Dispatch<any>) => {
+// configs
+import { PATH_NAME } from 'configs';
+
+export const login = (username: string, history: IHistory) => async (dispatch: Dispatch<any>) => {
   dispatch({ type: IAuthActionTypes.LOGIN_REQUEST });
 
   const user = await authService.loginWithAuth0(username);
   dispatch({ type: IAuthActionTypes.LOGIN_SUCCESS, payload: user });
+  history.push(PATH_NAME.ROOT);
 };
 
 export const logout = () => (dispatch: Dispatch<any>) => {

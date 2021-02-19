@@ -39,7 +39,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     flex: '0 0 48px',
   },
   externalLink: {
-    marginBottom: 20,
+    '& + &': {
+      marginTop: 20,
+    },
   },
   alertRoot: {
     margin: '12px 0',

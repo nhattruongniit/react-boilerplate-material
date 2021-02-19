@@ -8,9 +8,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
-// components
-import TypographyBase from 'components/atoms/TypographyBase';
+import Typography from '@material-ui/core/Typography';
 
 // actions
 import { setDialog } from 'actions/app.action';
@@ -30,7 +28,9 @@ export default function DialogError() {
     <div>
       <Dialog open={isShow} onClose={handleClose} fullWidth>
         <DialogTitle>
-          <TypographyBase variant="h4" text="Error" />
+          <Typography variant="h4" component="div">
+            Error
+          </Typography>
         </DialogTitle>
         <DialogContent>
           <DialogContentText>Something went wrong from systems!</DialogContentText>

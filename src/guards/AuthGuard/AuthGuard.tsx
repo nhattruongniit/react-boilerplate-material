@@ -8,7 +8,7 @@ import { PATH_NAME } from 'configs';
 import authService from 'services/authService';
 
 const AuthGuard: FC = ({ children }) => {
-  const isAuth = authService.isAuthenticated();
+  const isAuth = authService.getAccessToken();
 
   if (!isAuth) return <Redirect to={PATH_NAME.LOGIN} />;
 

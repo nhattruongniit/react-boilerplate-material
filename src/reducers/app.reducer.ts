@@ -7,11 +7,7 @@ const initialState: IAppState = {
     isShow: false,
     content: '',
   },
-  snackbar: {
-    type: 'error',
-    isShow: false,
-    content: '',
-  },
+  notifications: {},
 };
 
 const reducer = (state = initialState, { type, payload }: IAppActionCreator) => {
@@ -30,15 +26,28 @@ const reducer = (state = initialState, { type, payload }: IAppActionCreator) => 
           content: payload.dialog.content,
         },
       };
-    case IAppActionTypes.SET_SNACKBAR:
+    case IAppActionTypes.ENQUEUE_SNACKBAR: {
+      const { key, message, variant } = payload;
       return {
         ...state,
-        snackbar: {
-          type: payload.type,
-          isShow: payload.isShow,
-          content: payload.content,
+        notifications: {
+          ...state.notifications,
+          [key]: {
+            key,
+            message,
+            variant,
+          },
         },
       };
+    }
+    case IAppActionTypes.REMOVE_SNACKBAR: {
+      const newNotfi = { ...state.notifications };
+      delete newNotfi[payload];
+      return {
+        ...state,
+        notifications: newNotfi,
+      };
+    }
     default:
       return state;
   }

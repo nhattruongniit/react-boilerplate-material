@@ -1,8 +1,9 @@
-export enum IAppActionTypes {
-  SET_LOADING = 'APP/SET_LOADING',
-  SET_DIALOG = 'APP/SET_DIALOG',
-  SET_SNACKBAR = 'APP/SET_SNACKBAR',
-}
+export const IAppActionTypes = {
+  SET_LOADING: 'APP/SET_LOADING',
+  SET_DIALOG: 'APP/SET_DIALOG',
+  ENQUEUE_SNACKBAR: 'APP/ENQUEUE_SNACKBAR',
+  REMOVE_SNACKBAR: 'APP/REMOVE_SNACKBAR',
+};
 
 type IDialog = {
   type: string;
@@ -13,7 +14,7 @@ type IDialog = {
 export type IAppState = {
   isLoading: boolean;
   dialog: IDialog;
-  snackbar: ISnackBar;
+  notifications: any;
 };
 
 export type IAppActionCreator = {
@@ -21,8 +22,8 @@ export type IAppActionCreator = {
   payload: any;
 };
 
-export type ISnackBar = {
-  isShow: boolean;
-  type?: 'success' | 'info' | 'warning' | 'error';
-  content?: React.ReactNode | string;
+export type INotifer = {
+  key: number | string;
+  message?: string | React.ReactNode;
+  variant?: 'success' | 'error' | 'warning' | 'info';
 };

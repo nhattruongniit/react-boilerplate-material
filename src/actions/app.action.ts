@@ -1,4 +1,4 @@
-import { IAppActionTypes, ISnackBar } from 'models/IAppState';
+import { IAppActionTypes, INotifer } from 'models/IAppState';
 
 export const setLoading = (isLoading: boolean) => ({
   type: IAppActionTypes.SET_LOADING,
@@ -16,11 +16,18 @@ export const setDialog = (isShow: boolean, type: string = 'error', content: Reac
   },
 });
 
-export const setSnackBar = ({ isShow = false, type = 'success', content = 'This is a success!' }: ISnackBar) => ({
-  type: IAppActionTypes.SET_SNACKBAR,
-  payload: {
-    type,
-    isShow,
-    content,
-  },
+export const enqueueSnackbarAction = (notification: INotifer) => {
+  return {
+    type: IAppActionTypes.ENQUEUE_SNACKBAR,
+    payload: {
+      key: notification.key || new Date().getTime() + Math.random(),
+      message: notification.message,
+      variant: notification.variant || 'success',
+    },
+  };
+};
+
+export const removeSnackbar = (key: string | number | undefined) => ({
+  type: IAppActionTypes.REMOVE_SNACKBAR,
+  payload: key,
 });

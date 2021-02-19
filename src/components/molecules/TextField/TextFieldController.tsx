@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { withStyles, Theme } from '@material-ui/core/styles';
 
 // material core
@@ -24,7 +24,7 @@ export type ITextFieldShrinkProps = TextFieldProps & {
   showRequiredLabel?: boolean;
   showTooltip?: boolean;
   titleTooltip?: string | React.ReactNode | any;
-  maxHeight?: number | null;
+  maxLength?: number | null;
   placement?:
     | 'right'
     | 'bottom-end'
@@ -42,37 +42,30 @@ export type ITextFieldShrinkProps = TextFieldProps & {
   title?: string;
   value?: string;
   onChangeValue: (value: string) => void;
+  helperText?: string | React.ReactNode;
+  showTextLength?: boolean;
 };
 
-const TextFieldShrink = ({
+const TextFieldController = ({
   showRequiredLabel = false,
   showTooltip = false,
   title,
   titleTooltip = '',
   placement = 'right',
-  maxHeight = null,
+  maxLength = null,
   value,
   onChangeValue,
+  helperText = '',
+  showTextLength = true,
   ...props
 }: ITextFieldShrinkProps) => {
   const classes = useStyles();
-  const [inputValue, setInputValue] = useState(value);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      onChangeValue(inputValue || '');
-    }, 500);
-    return () => {
-      clearTimeout(timeout);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inputValue]);
 
   return (
     <div>
       <TextField
         fullWidth
-        inputProps={{ maxLength: maxHeight }}
+        inputProps={{ maxLength }}
         label={
           <div className={classes.textLabel}>
             {showRequiredLabel && <span className={classes.textError}>*</span>}
@@ -87,17 +80,22 @@ const TextFieldShrink = ({
         InputLabelProps={{
           shrink: true,
         }}
-        defaultValue={value}
-        onChange={(e) => setInputValue(e.target.value)}
+        value={value}
+        onChange={(e) => onChangeValue(e.target.value)}
+        helperText={
+          <strong className={classes.helperText}>
+            <span className={classes.textGrow}>{helperText}</span>
+            {maxLength && showTextLength && (
+              <TypographyBase color="textSecondary" component="span" fontSize="12px" className={classes.messageCount}>
+                {value?.length} / {maxLength}
+              </TypographyBase>
+            )}
+          </strong>
+        }
         {...props}
       />
-      {maxHeight && (
-        <div className={classes.messageCount}>
-          {value?.length} / {maxHeight}
-        </div>
-      )}
     </div>
   );
 };
 
-export default TextFieldShrink;
+export default TextFieldController;

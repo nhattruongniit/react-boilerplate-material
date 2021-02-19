@@ -21,6 +21,7 @@
     "i18next": "^19.8.4",
     "i18next-browser-languagedetector": "^6.0.1",
     "lodash": "^4.17.20",
+    "notistack": "^1.0.3",
     "react": "16.14.0",
     "react-dom": "16.14.0",
     "react-error-boundary": "^3.0.2",
@@ -36,6 +37,7 @@
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
+    "source-map-explorer": "^2.5.2",
     "typescript": "^4.0.5",
     "web-vitals": "^0.2.4"
   },
@@ -49,7 +51,8 @@
     "format": "prettier --write src/**/*.{ts,tsx}",
     "isready": "npm run format && npm run lint && npm run build",
     "docker": "docker build -t react-docker .",
-    "react-docker": "docker run -p 3000:80 react-docker"
+    "react-docker": "docker run -p 3000:80 react-docker",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "eslintConfig": {
     "extends": [

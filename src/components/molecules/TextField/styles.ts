@@ -19,6 +19,13 @@ const useStyles = makeStyles(() =>
       marginTop: 10,
       fontSize: 12,
     },
+    helperText: {
+      display: 'flex',
+      fontWeight: 'normal',
+    },
+    textGrow: {
+      flexGrow: 1,
+    },
   }),
 );
 

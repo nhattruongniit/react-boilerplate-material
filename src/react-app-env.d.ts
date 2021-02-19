@@ -8,6 +8,8 @@ declare namespace NodeJS {
     REACT_APP_ENDPOINT_URL: string;
     REACT_APP_DELAY_GET_DATA: number;
     REACT_APP_DEBOUNCE_TIME: number;
+    REACT_APP_MAX_SNACKBAR: number;
+    REACT_APP_AUTO_HIDE_SNACKBAR: number;
 
     REACT_APP_KEY_TOKEN: string;
     REACT_APP_KEY_EXPIRED_DATE: string;

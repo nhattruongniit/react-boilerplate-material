@@ -8,17 +8,12 @@ import parse from 'autosuggest-highlight/parse';
 // material core
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Paper from '@material-ui/core/Paper';
 
 // material icon
-import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import CloseIcon from '@material-ui/icons/Close';
-import SaveIcon from '@material-ui/icons/Save';
 
 // atomic
-import TypographyBase from 'components/atoms/TypographyBase';
 import IconButton from 'components/atoms/IconButton';
 import { TextFieldShrink } from 'components/molecules/TextField';
 import { AutoCompleteComboBox } from 'components/molecules/AutoComplete';
@@ -27,16 +22,8 @@ import { AlertConfirm } from 'components/molecules/AlertBase';
 // types
 import { IParams } from 'models/IRoutes';
 
-// redux
-import { setSnackBar } from 'actions/app.action';
-
 // useReducer
 import { initialValues, reducer, actionTypes } from './useReducer';
-
-// components
-import FieldDescription from './components/FieldDescription';
-import FieldArtistName from './components/FieldArtistName';
-import FieldArtistNameRomanized from './components/FieldArtistNameRomanized';
 
 // mock data
 import * as mockData from './mockData';
@@ -303,13 +290,13 @@ function ArtistAdd() {
       (item) => !((item.linkId && item.linkType) || (!item.linkId && !item.linkType)),
     );
     if (isValidExternal) {
-      dispatchRedux(
-        setSnackBar({
-          isShow: true,
-          type: 'error',
-          content: 'Please enter Link!',
-        }),
-      );
+      // dispatchRedux(
+      //   setSnackBar({
+      //     isShow: true,
+      //     type: 'error',
+      //     content: 'Please enter Link!',
+      //   }),
+      // );
       return;
     }
 
@@ -330,119 +317,40 @@ function ArtistAdd() {
 
   return (
     <>
-      <h1>{params.id ? 'Edit Product' : 'Create Product'}</h1>
+      <h1>Create Product</h1>
       <Paper className={classes.paper}>
         <br />
         <form onSubmit={onSubmit}>
           <Grid>
             <div className={classes.head}>
-              <div className={classes.headTitle}>
-                <span className={classes.textError}>*</span>Artist Name
-              </div>
-              <div className={classes.headLead}>
-                This information is listed on all content on ACM so it must be correct. In most cases, it is the same as found on
-                releases.
-              </div>
-            </div>
-          </Grid>
-          <br />
-          <Grid container spacing={2}>
-            <Grid item xs={12} md={4}>
-              <FieldArtistName
-                keyReset={keyResetArtistName}
-                data={artistName.name}
-                valueArtistName={valueArtistName}
-                setValueArtistName={setValueArtistName}
-                handleArtistNameChange={handleArtistNameChange}
-              />
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <FieldArtistNameRomanized
-                keyReset={keyResetArtistName}
-                data={artistName.romanizedName}
-                handleArtistNameChange={handleArtistNameChange}
-              />
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <AutoCompleteComboBox
-                key={keyResetAutoCompleteArtistLocale}
-                id="artist-language"
-                label="Language"
-                data={mockData.locales || []}
-                value={artistName.locale}
-                getOptionSelected={(option) => option.id === artistName.locale?.id}
-                getOptionLabel={(option: any) => option.name}
-                placeholder="Search for a language"
-                renderOption={(option: any, { inputValue }) => {
-                  const matches = match(option.name, inputValue);
-                  const parts = parse(option.name, matches);
-                  return (
-                    <div>
-                      {parts.map((part, index) => (
-                        <span key={index} style={{ fontWeight: part.highlight ? 700 : 400 }}>
-                          {part.text}
-                        </span>
-                      ))}
-                    </div>
-                  );
-                }}
-                onChangeValue={(value: any | null) => {
-                  checkPrimaryNameLocale(value);
-                }}
-              />
-              <TypographyBase color="textSecondary" component="div">
-                This is the primary name for this region
-              </TypographyBase>
-            </Grid>
-          </Grid>
-          <br />
-          <Grid>
-            <div className={classes.head}>
-              <div className={classes.headTitle}>Aliases</div>
-              <div className={classes.headLead}>
-                An alias name or AKA (also known as) is any name that has been used by the Artist. One Artist can have multiple
-                aliases.
-              </div>
+              <div className={classes.headTitle}>Product List</div>
             </div>
           </Grid>
           <br />
           {aliases.map((alias, index) => {
             return (
               <Grid key={alias.id} container spacing={2} className={classes.aliasArtist}>
-                <Grid item xs={12} md={4}>
+                <Grid item xs={12} md={6}>
                   <TextFieldShrink
-                    id={`artistName-${alias.id}`}
+                    id={`productName-${alias.id}`}
                     name="name"
+                    placeholder="Please enter product name"
                     value={alias.name}
-                    title="Artist Name (Alias)"
-                    placeholder="Input Artist Name"
+                    title="Product Name"
                     variant="outlined"
                     onChangeValue={handleAliasesChange(index, 'name')}
                   />
                 </Grid>
-                <Grid item xs={12} md={4}>
-                  <TextFieldShrink
-                    id={`romanizedName-${alias.id}`}
-                    name="romanizedName"
-                    value={alias.romanizedName}
-                    showTooltip
-                    titleTooltip="If the Artist Name has non-roman characters like Chinese, enter the romanized version here"
-                    title="Romanized Name"
-                    placeholder="Input Romanized Version"
-                    variant="outlined"
-                    onChangeValue={handleAliasesChange(index, 'romanizedName')}
-                  />
-                </Grid>
-                <Grid container item wrap="nowrap" xs={12} md={4}>
+                <Grid container item wrap="nowrap" xs={12} md={6}>
                   <div className={classes.aliasLocales}>
                     <AutoCompleteComboBox
-                      id={`locales-${alias.id}`}
-                      label="Language"
+                      id={`region-${alias.id}`}
+                      label="Region"
                       value={alias.locale}
                       getOptionSelected={(option) => option.id === alias.locale?.id}
                       data={mockData.locales || []}
                       getOptionLabel={(option: any) => option.name}
-                      placeholder="Search for a language"
+                      placeholder="Select a region"
                       renderOption={(option: any, { inputValue }) => {
                         const matches = match(option.name, inputValue);
                         const parts = parse(option.name, matches);
@@ -463,25 +371,6 @@ function ArtistAdd() {
                         setAliases(newAliases);
                       }}
                     />
-                    {renderCheckBoxLocale(alias) ? (
-                      <TypographyBase color="textSecondary" component="div" className={classes.checkLocales}>
-                        <FormControlLabel
-                          label="This is the primary alias for this region"
-                          control={
-                            <Checkbox
-                              id={`checkbox-locale-${alias.id}`}
-                              color="primary"
-                              name="primaryLocale"
-                              checked={Boolean(alias.primaryLocale && alias.locale)}
-                              disabled={!alias.locale || !alias.locale.id}
-                              onChange={(e) => {
-                                checkAliasLocale(index, e.target.checked, alias);
-                              }}
-                            />
-                          }
-                        />
-                      </TypographyBase>
-                    ) : null}
                   </div>
                   {aliases.length > 1 ? (
                     <div className={classes.iconClose}>
@@ -506,32 +395,35 @@ function ArtistAdd() {
           </Grid>
           <Grid>
             <div className={classes.head}>
-              <div className={classes.headTitle}>Artist Information</div>
+              <div className={classes.headTitle}>Product Information</div>
             </div>
           </Grid>
           <br />
           <Grid container spacing={2}>
             <Grid item xs={12} md={12}>
-              <FieldDescription
-                keyReset={keyResetDescription}
-                data={description}
-                setIsErrorDescription={setIsErrorDescription}
-                isErrorDescription={isErrorDescription}
-                setDescription={setDescription}
+              <TextFieldShrink
+                id="product-description"
+                title="Description"
+                placeholder="Please enter a description"
+                variant="outlined"
+                maxHeight={150}
+                multiline
+                rows={3}
+                error={isErrorDescription}
+                onChangeValue={(value) => {
+                  if (value !== '') {
+                    setIsErrorDescription(false);
+                  }
+                  setDescription(value);
+                }}
               />
             </Grid>
           </Grid>
           <Grid>
             <div className={classes.head}>
-              <div className={classes.headTitle}>PRO - IPI Code</div>
-              <div className={classes.headLead}>
-                An IPI number is an international identification number assigned to songwriters and publishers by <br />
-                their Performing RightsOrgination (PRO) to uniquely identify them as rights holders
-              </div>
+              <div className={classes.headTitle}>Product Category</div>
             </div>
           </Grid>
-          <br />
-          <br />
           <br />
           {externalLinkList &&
             externalLinkList.map((external, index) => {
@@ -539,13 +431,13 @@ function ArtistAdd() {
                 <Grid key={external.id} container spacing={2} className={classes.externalLink}>
                   <Grid item xs={12} md={4}>
                     <AutoCompleteComboBox
-                      id={`artist-linkType-${external.id}`}
-                      label="Link Type"
+                      id={`productCategory-${external.id}`}
+                      label="Category"
                       value={external.linkType}
                       getOptionSelected={(option) => option.id === external.linkType?.id}
                       data={enumArtistLink || []}
                       getOptionLabel={(option: any) => option.value}
-                      placeholder="Search for a Link Type"
+                      placeholder="Select a category"
                       error={Boolean(external.linkId !== '' && !external.linkType)}
                       renderOption={(option: any, { inputValue }) => {
                         const matches = match(option.value, inputValue);
@@ -569,9 +461,9 @@ function ArtistAdd() {
                   </Grid>
                   <Grid item xs={12} md={4}>
                     <TextFieldShrink
-                      id={`artist-linkId-${external.id}`}
-                      title="Link ID"
-                      placeholder="Input Link ID or an URL"
+                      id={`productCode-${external.id}`}
+                      title="Product Code"
+                      placeholder="Please enter product code"
                       variant="outlined"
                       value={external.linkId}
                       error={Boolean(external.linkId === '' && external.linkType)}
@@ -624,14 +516,8 @@ function ArtistAdd() {
             >
               CANCEL
             </Button>
-            <Button
-              id="button-submit"
-              type="submit"
-              variant="contained"
-              color="primary"
-              startIcon={params.id ? <SaveIcon /> : <GroupAddIcon />}
-            >
-              {params.id ? 'Edit Product' : 'Create Product'}
+            <Button id="button-submit" type="submit" variant="contained" color="primary">
+              Create Product
             </Button>
           </Grid>
         </form>

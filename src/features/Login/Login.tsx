@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 // material core
 import Avatar from '@material-ui/core/Avatar';
@@ -39,11 +40,12 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
   const [name, setName] = useState('tonynguyen');
 
   const _onSubmit = (e: any) => {
     e.preventDefault();
-    dispatch(login(name));
+    dispatch(login(name, history));
   };
 
   return (

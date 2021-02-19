@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-
-import { fetchTodo } from 'apis/song.api';
+import { useDispatch } from 'react-redux';
+import { fetchTodo } from 'apis/common.api';
 import useGet from 'hooks/useGet';
 
+// redux
+import { enqueueSnackbarAction } from 'actions/app.action';
+
 function Playbackground() {
+  const dispatch = useDispatch();
   const [boundary, setBoundary] = useState({});
   const [todo, setTodo] = useState({
     title: '',
@@ -23,6 +27,16 @@ function Playbackground() {
   const _onFetchError = async () => {
     await fetchTodo('/todos123/1');
   };
+
+  function checkSnackBar() {
+    dispatch(
+      enqueueSnackbarAction({
+        message: 'Check snackbar Successful!',
+        key: new Date().getTime() + Math.random(),
+        variant: 'success',
+      }),
+    );
+  }
 
   return (
     <div>
@@ -57,6 +71,10 @@ function Playbackground() {
       <br />
       <button type="button" onClick={() => setPagination(pagination + 1)}>
         fetch multi
+      </button>
+      <h3>Check snackbar</h3>
+      <button type="button" onClick={checkSnackBar}>
+        Click here
       </button>
     </div>
   );

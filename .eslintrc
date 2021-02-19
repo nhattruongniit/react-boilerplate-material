@@ -13,6 +13,7 @@
     }
   },
   "rules": {
+    "object-shorthand": "off",
     "object-curly-spacing": ["warn", "always"],
     "@typescript-eslint/no-unused-vars": [
       "warn",

@@ -13,7 +13,7 @@ export const dialogSelector = createSelector(
   (app) => app.dialog,
 );
 
-export const snackbarSelector = createSelector(
+export const notificationsSelector = createSelector(
   (state: IRootState) => state.app,
-  (app) => app.snackbar,
+  (app) => app.notifications,
 );
