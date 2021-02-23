@@ -9,7 +9,7 @@ pipelines:
           script:
             - export IMAGE=react-boilerplate:${BITBUCKET_TAG}
             - docker build -t react-boilerplate:${BITBUCKET_TAG} .
-            - pipe: atlassian/aws-ecr-push-image:0.1
+            - pipe: atlassian/xx-image:0.1
               variables:
                 AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
                 AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
@@ -22,7 +22,7 @@ pipelines:
             - git clone {bitbucket}
             - cd {folder} && git checkout develop && git pull
             - cd ..
-            - pipe: atlassian/aws-eks-kubectl-run:0.1
+            - pipe: atlassian/xx-kubectl-run:0.1
               variables:
                 AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
                 AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
