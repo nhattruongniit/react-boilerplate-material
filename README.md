@@ -16,6 +16,7 @@
 - axios interceptor
 - cancel request
 - authentication guards
+- @casl/ability role
 
 ### Testing
 

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 
+// material core
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -7,9 +8,14 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 
 // atomic
 import PaginationBase from 'components/molecules/PaginationBase';
+
+// helpers
+import { canAction } from 'helpers';
 
 // hooks
 import usePagination from 'hooks/usePagination';
@@ -35,6 +41,14 @@ function ProductList() {
 
   return (
     <div>
+      {canAction('create', 'product') ? (
+        <Grid container justify="flex-end">
+          <Button type="submit" variant="contained" color="primary">
+            Create Product
+          </Button>
+        </Grid>
+      ) : null}
+      <br />
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
           <TableHead>
