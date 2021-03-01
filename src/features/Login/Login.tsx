@@ -10,9 +10,16 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 // material icon
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+
+// configs
+import { USER_ROLE } from 'configs';
 
 // actions
 import { login } from 'actions/auth.action';
@@ -42,10 +49,11 @@ export default function SignIn() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [name, setName] = useState('tonynguyen');
+  const [role, setRole] = useState('ADMIN');
 
-  const _onSubmit = (e: any) => {
+  const _onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(login(name, history));
+    dispatch(login(name, role, history));
   };
 
   return (
@@ -69,9 +77,24 @@ export default function SignIn() {
             name="name"
             autoComplete="name"
             autoFocus
-            defaultValue={name}
+            value={name}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
           />
+          <br />
+          <br />
+          <FormControl variant="outlined" fullWidth>
+            <InputLabel id="demo-simple-select-outlined-label">Role</InputLabel>
+            <Select
+              fullWidth
+              value={role}
+              onChange={(e: React.ChangeEvent<{ value: unknown }>) => setRole(e.target.value as string)}
+              label="Role"
+            >
+              <MenuItem value={USER_ROLE.ADMIN}>Admin</MenuItem>
+              <MenuItem value={USER_ROLE.LEAD}>Lead</MenuItem>
+              <MenuItem value={USER_ROLE.GUEST}>Guest</MenuItem>
+            </Select>
+          </FormControl>
           <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
             Submit
           </Button>

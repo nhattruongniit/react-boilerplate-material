@@ -7,17 +7,19 @@ class AuthService {
     this.setSession(acccessToken);
   };
 
-  loginWithAuth0 = async (username: string) => {
+  loginWithAuth0 = async (username: string, roleUser: string) => {
     const accessToken = '1929312831903129321';
     this.setSession(accessToken);
     return {
       user: username,
+      role: roleUser,
     };
   };
 
   loginWithToken = async () => {
     return {
       user: 'tonynguyen',
+      role: 'LEAD',
     };
   };
 

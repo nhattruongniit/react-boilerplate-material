@@ -18,4 +18,5 @@ export type IPagination = {
 
 export type IHistory = {
   push(url: string): void;
+  replace(url: string): void;
 };

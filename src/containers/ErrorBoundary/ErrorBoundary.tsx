@@ -12,11 +12,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Typography from '@material-ui/core/Typography';
 
-type IProps = {
-  children: React.ReactNode;
-};
-
-const DefaultPage: FC<IProps> = ({ children }) => {
+const DefaultPage: FC = ({ children }) => {
   const [boundaryKey, setBoundaryKey] = useState(0);
 
   const memorizedSyncLog = useCallback(async (message?: any, componentStack?: any) => {

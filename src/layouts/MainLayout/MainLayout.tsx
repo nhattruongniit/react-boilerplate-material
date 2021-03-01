@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, FC } from 'react';
 
 // libs
 import clsx from 'clsx';
@@ -16,11 +16,7 @@ import TopBar from './TopBar';
 // styles
 import useStyles from './styles';
 
-type IProps = {
-  children: React.ReactNode;
-};
-
-export default function MainLayout({ children }: IProps) {
+const MainLayout: FC = ({ children }) => {
   const classes = useStyles();
   const [isDrawer, setIsDrawer] = useState(true);
 
@@ -46,4 +42,6 @@ export default function MainLayout({ children }: IProps) {
       </main>
     </div>
   );
-}
+};
+
+export default MainLayout;

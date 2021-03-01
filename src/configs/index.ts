@@ -1,4 +1,5 @@
 import { PATH_NAME } from './pathName';
+import { USER_ROLE } from './userRole';
 
 export const THEMES = {
   LIGHT: 'light',
@@ -10,4 +11,4 @@ export const LANGUAGE = {
   VIETNAMESE: 'vn',
 };
 
-export { PATH_NAME };
+export { PATH_NAME, USER_ROLE };

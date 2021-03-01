@@ -1,24 +1,23 @@
 import { AbilityBuilder, Ability } from '@casl/ability';
-import store from 'stores';
+
+// configs
+import { USER_ROLE } from 'configs';
 
 function defineAbilitiesFor(type: string) {
   const { can, cannot, build } = new AbilityBuilder(Ability);
 
   switch (type) {
-    case 'ADMIN':
+    case USER_ROLE.ADMIN:
       can(['create', 'update', 'view', 'delete'], 'all');
       break;
-    case 'LEAD':
+    case USER_ROLE.LEAD:
       // menu
       can('view', 'menu-add-product');
-
-      // router
-      can('view', 'page-add-proudct');
 
       // action
       can('create', 'product');
       break;
-    case 'GUEST':
+    case USER_ROLE.GUEST:
       cannot(['create', 'update', 'view', 'delete'], 'all');
       break;
   }
@@ -26,8 +25,7 @@ function defineAbilitiesFor(type: string) {
 }
 
 const canAction = (action: string, resource: string) => {
-  // eslint-disable-next-line prefer-destructuring
-  const abilities = defineAbilitiesFor('LEAD');
+  const abilities = defineAbilitiesFor(USER_ROLE.LEAD);
   return abilities.can(action, resource);
 };
 

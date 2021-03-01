@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, FC } from 'react';
 import { useDispatch } from 'react-redux';
 
 // services
@@ -7,11 +7,7 @@ import authService from 'services/authService';
 // actions
 import { setUserData } from 'actions/auth.action';
 
-type IProps = {
-  children: any;
-};
-
-const Auth = ({ children }: IProps) => {
+const Auth: FC = ({ children }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,8 +15,8 @@ const Auth = ({ children }: IProps) => {
       authService.handleAuthentication();
 
       if (authService.isAuthenticated()) {
-        const user = await authService.loginWithToken();
-        dispatch(setUserData(user));
+        const { user, role } = await authService.loginWithToken();
+        dispatch(setUserData(user, role));
       }
     }
     initAuth();

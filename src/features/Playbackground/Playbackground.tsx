@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchTodo } from 'apis/common.api';
 import useGet from 'hooks/useGet';
 
-// redux
+// action
 import { enqueueSnackbarAction } from 'actions/app.action';
+
+// selectors
+import { roleSelector } from 'selectors/auth.selector';
 
 function Playbackground() {
   const dispatch = useDispatch();
+  const role = useSelector(roleSelector);
   const [boundary, setBoundary] = useState({});
   const [todo, setTodo] = useState({
     title: '',
@@ -40,6 +44,7 @@ function Playbackground() {
 
   return (
     <div>
+      <h1>Role: {role}</h1>
       <h3>Error boundary</h3>
       this is add song
       {Object.keys(boundary).length > 0 && boundary}

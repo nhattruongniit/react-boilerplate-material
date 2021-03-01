@@ -2,7 +2,7 @@ import React, { Fragment, lazy, Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 // configs
-import { PATH_NAME } from 'configs';
+import { PATH_NAME, USER_ROLE } from 'configs';
 
 // types
 import { IRoutes } from 'models/IRoutes';
@@ -13,6 +13,9 @@ import MainLayout from 'layouts/MainLayout';
 // containers
 import AuthGuard from 'guards/AuthGuard';
 import GuestGuard from 'guards/GuestGuard';
+
+// route
+import RoleRoute from './RoleRoute';
 
 // modules
 const Error404View = lazy(() => import('features/Error404View'));
@@ -49,26 +52,31 @@ const routesConfig: IRoutes[] = [
         exact: true,
         path: PATH_NAME.PLAY_BACKGROUND,
         component: Playbackground,
+        requireRoles: [USER_ROLE.ADMIN, USER_ROLE.LEAD],
       },
       {
         exact: true,
         path: PATH_NAME.PRODUCT_LIST,
         component: ProductList,
+        requireRoles: [USER_ROLE.ADMIN],
       },
       {
         exact: true,
         path: PATH_NAME.PRODUCT_ADD,
         component: ProductAdd,
+        requireRoles: [USER_ROLE.ADMIN],
       },
       {
         exact: true,
         path: PATH_NAME.RAPPER,
         component: Rapper,
+        requireRoles: [USER_ROLE.ADMIN],
       },
       {
         exact: true,
         path: PATH_NAME.USERS,
         component: Users,
+        requireRoles: [USER_ROLE.ADMIN, USER_ROLE.LEAD],
       },
       {
         component: () => <Redirect to={PATH_NAME.ERROR_404} />,
@@ -100,6 +108,7 @@ const renderRoutes = (routes: IRoutes[]) => {
               const Guard = route.guard || Fragment;
               const Layout = route.layout || Fragment;
               const Component = route.component;
+              const requireRoles = route.requireRoles || [];
 
               return (
                 <Route
@@ -108,7 +117,15 @@ const renderRoutes = (routes: IRoutes[]) => {
                   exact={route.exact}
                   render={(props: any) => (
                     <Guard>
-                      <Layout>{route.routes ? renderRoutes(route.routes) : <Component {...props} />}</Layout>
+                      <Layout>
+                        {route.routes ? (
+                          renderRoutes(route.routes)
+                        ) : (
+                          <RoleRoute requireRoles={requireRoles}>
+                            <Component {...props} />
+                          </RoleRoute>
+                        )}
+                      </Layout>
                     </Guard>
                   )}
                 />

@@ -12,3 +12,8 @@ export const userSelector = createSelector(
   (state: IRootState) => state.auth,
   (auth) => auth.user,
 );
+
+export const roleSelector = createSelector(
+  (state: IRootState) => state.auth,
+  (auth) => auth.role,
+);

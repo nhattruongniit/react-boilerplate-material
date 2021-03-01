@@ -17,6 +17,12 @@
 - cancel request
 - authentication guards
 - @casl/ability role
+- role & permission based route.
+
+### CI/CD
+
+- docker
+- bitbucket pipeline
 
 ### Testing
 
