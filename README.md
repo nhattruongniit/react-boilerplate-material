@@ -18,6 +18,7 @@
 - authentication guards
 - @casl/ability role
 - role & permission based route.
+- wavesurfer
 
 ### CI/CD
 

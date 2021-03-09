@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 // material core
 import Table from '@material-ui/core/Table';
@@ -13,6 +14,9 @@ import Grid from '@material-ui/core/Grid';
 
 // atomic
 import PaginationBase from 'components/molecules/PaginationBase';
+
+// configs
+import { PATH_NAME } from 'configs';
 
 // helpers
 import { canAction } from 'helpers';
@@ -33,17 +37,14 @@ const rows = [
 ];
 
 function ProductList() {
+  const history = useHistory();
   const { page, perPage, _changePage, _changePerPage } = usePagination();
-
-  useEffect(() => {
-    console.log('pagination: ', perPage, page);
-  }, [perPage, page]);
 
   return (
     <div>
       {canAction('create', 'product') ? (
         <Grid container justify="flex-end">
-          <Button type="submit" variant="contained" color="primary">
+          <Button type="submit" variant="contained" color="primary" onClick={() => history.push(PATH_NAME.PRODUCT_ADD)}>
             Create Product
           </Button>
         </Grid>

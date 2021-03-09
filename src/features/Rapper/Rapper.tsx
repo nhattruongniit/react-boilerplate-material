@@ -1,7 +1,14 @@
 import React from 'react';
 
+import WaveSurfer from 'components/molecules/WaveSurfer';
+
 function Rapper() {
-  return <div>this is Rapper</div>;
+  return (
+    <>
+      <div>Rapper Play</div>
+      <WaveSurfer />
+    </>
+  );
 }
 
 export default Rapper;

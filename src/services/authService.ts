@@ -1,15 +1,15 @@
 class AuthService {
   handleAuthentication = () => {
-    const acccessToken = this.getAccessToken();
-
-    if (!acccessToken || !this.isValidToken(acccessToken)) return;
-
-    this.setSession(acccessToken);
+    const accessToken = this.getAccessToken();
+    if (!accessToken || !this.isValidToken(accessToken)) return;
+    this.setSession('accessToken', accessToken);
   };
 
   loginWithAuth0 = async (username: string, roleUser: string) => {
     const accessToken = '1929312831903129321';
-    this.setSession(accessToken);
+    this.setSession('accessToken', accessToken);
+    const userStringify = JSON.stringify({ username, roleUser });
+    this.setSession('user', userStringify);
     return {
       user: username,
       role: roleUser,
@@ -19,20 +19,20 @@ class AuthService {
   loginWithToken = async () => {
     return {
       user: 'tonynguyen',
-      role: 'LEAD',
     };
   };
 
-  setSession = (accessToken: string | null) => {
-    if (!accessToken) {
-      localStorage.removeItem('accessToken');
-      return;
-    }
-    localStorage.setItem('accessToken', accessToken);
+  setSession = (key: string, accessToken: string) => {
+    localStorage.setItem(key, accessToken);
   };
 
   logOut = () => {
-    this.setSession(null);
+    localStorage.clear();
+  };
+
+  getUser = () => {
+    const user = localStorage.getItem('user') || '';
+    return user;
   };
 
   getAccessToken = () => localStorage.getItem('accessToken');

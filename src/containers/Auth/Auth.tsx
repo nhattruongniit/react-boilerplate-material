@@ -11,12 +11,13 @@ const Auth: FC = ({ children }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    async function initAuth() {
+    function initAuth() {
       authService.handleAuthentication();
 
       if (authService.isAuthenticated()) {
-        const { user, role } = await authService.loginWithToken();
-        dispatch(setUserData(user, role));
+        const user = authService.getUser();
+        const parseUser = JSON.parse(user);
+        dispatch(setUserData(parseUser.username, parseUser.roleUser));
       }
     }
     initAuth();
