@@ -1,4 +1,4 @@
-PERMISSION MUSICDB
+PERMISSION
 
 Permission: create, update, delete, view, upload
 
