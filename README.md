@@ -1,4 +1,16 @@
-## STACK TECHNICAL
+# React Boilerplate Material UI
+
+A simple react boilerplate apps built with React Typescript, redux and Material Ui.
+ 
+## Working application
+
+Check out the live application -> https://xenodochial-tereshkova-b7625c.netlify.app/
+
+![React Boilplate Demo](public/assets/images/lading-page1.png)
+
+![React Boilplate Overview](public/assets/images/lading-page2.png)
+
+## Stack
 
 ### FE
 
