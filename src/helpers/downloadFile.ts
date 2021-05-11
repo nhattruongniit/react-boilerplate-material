@@ -15,7 +15,6 @@ const downloadFile = (name: string, url: string, filetype: string) => {
         resolve();
       })
       .catch(() => {
-        alert("Can't download file from server!");
         reject();
       });
   });
