@@ -30,7 +30,7 @@ const routesConfig: IRoutes[] = [
   {
     exact: true,
     path: '/',
-    component: () => <Redirect to={PATH_NAME.PRODUCT_LIST} />,
+    component: () => <Redirect to={PATH_NAME.PLAY_BACKGROUND} />,
   },
   {
     exact: true,
