@@ -22,8 +22,6 @@ const RoleRoute: FC<IProps> = ({ children, requireRoles = [] }) => {
     const checkRole = requireRoles.includes(role);
     if (!checkRole) {
       history.replace(PATH_NAME.PLAY_BACKGROUND);
-      // eslint-disable-next-line no-alert
-      alert('Permission denied');
     }
   }, [history, role, requireRoles]);
 

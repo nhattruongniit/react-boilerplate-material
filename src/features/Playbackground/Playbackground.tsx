@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import useGet from 'hooks/useGet';
 
 // action
 import { enqueueSnackbarAction } from 'actions/app.action';
 
-// selectors
-import { roleSelector } from 'selectors/auth.selector';
-
 function Playbackground() {
   const dispatch = useDispatch();
-  const role = useSelector(roleSelector);
   const [pagination, setPagination] = useState(1);
   const { data } = useGet(`/todos/${pagination}`, {});
 
@@ -26,7 +22,6 @@ function Playbackground() {
 
   return (
     <div>
-      <h1>Role: {role}</h1>
       <h3>Cancel Request: Please open Network tab.</h3>
       Pagination: {pagination}
       <br />

@@ -11,6 +11,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import AddIcon from '@material-ui/icons/Add';
 
 // atomic
 import PaginationBase from 'components/molecules/PaginationBase';
@@ -44,8 +45,14 @@ function ProductList() {
     <div>
       {canAction('create', 'product') ? (
         <Grid container justify="flex-end">
-          <Button type="submit" variant="contained" color="primary" onClick={() => history.push(PATH_NAME.PRODUCT_ADD)}>
-            Create Product
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            startIcon={<AddIcon />}
+            onClick={() => history.push(PATH_NAME.PRODUCT_ADD)}
+          >
+            Add Product
           </Button>
         </Grid>
       ) : null}

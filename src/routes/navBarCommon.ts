@@ -2,17 +2,23 @@
 import AddIcon from '@material-ui/icons/Add';
 import ShopIcon from '@material-ui/icons/Shop';
 import ViewListIcon from '@material-ui/icons/ViewList';
-import PersonIcon from '@material-ui/icons/Person';
 import PeopleIcon from '@material-ui/icons/People';
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import AssessmentIcon from '@material-ui/icons/Assessment';
 
 // paths name
 import { PATH_NAME } from 'configs';
 
 export const navBarCommon = [
   {
-    subheader: 'Demo',
+    subheader: 'Application',
     items: [
+      {
+        title: 'Report',
+        href: PATH_NAME.DASHBOARD,
+        icon: DashboardIcon,
+      },
       {
         title: 'Playbackground',
         href: PATH_NAME.PLAY_BACKGROUND,
@@ -41,9 +47,9 @@ export const navBarCommon = [
         ],
       },
       {
-        title: 'Rapper',
-        href: PATH_NAME.RAPPER,
-        icon: PersonIcon,
+        title: 'Kanban',
+        href: PATH_NAME.KANBAN,
+        icon: AssessmentIcon,
       },
     ],
   },

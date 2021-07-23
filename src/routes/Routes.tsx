@@ -21,16 +21,17 @@ import RoleRoute from './RoleRoute';
 const Error404View = lazy(() => import('features/Error404View'));
 const ProductAdd = lazy(() => import('features/Product/ProductAdd'));
 const ProductList = lazy(() => import('features/Product/ProductList'));
-const Rapper = lazy(() => import('features/Rapper'));
 const Users = lazy(() => import('features/Users'));
+const Dashboard = lazy(() => import('features/Dashboard'));
 const Playbackground = lazy(() => import('features/Playbackground'));
 const Login = lazy(() => import('features/Login'));
+const Kanban = lazy(() => import('features/Kanban'));
 
 const routesConfig: IRoutes[] = [
   {
     exact: true,
     path: '/',
-    component: () => <Redirect to={PATH_NAME.PLAY_BACKGROUND} />,
+    component: () => <Redirect to={PATH_NAME.DASHBOARD} />,
   },
   {
     exact: true,
@@ -48,6 +49,12 @@ const routesConfig: IRoutes[] = [
     guard: AuthGuard,
     layout: MainLayout,
     routes: [
+      {
+        exact: true,
+        path: PATH_NAME.DASHBOARD,
+        component: Dashboard,
+        requireRoles: [USER_ROLE.ADMIN],
+      },
       {
         exact: true,
         path: PATH_NAME.PLAY_BACKGROUND,
@@ -68,9 +75,8 @@ const routesConfig: IRoutes[] = [
       },
       {
         exact: true,
-        path: PATH_NAME.RAPPER,
-        component: Rapper,
-        requireRoles: [USER_ROLE.ADMIN],
+        path: PATH_NAME.KANBAN,
+        component: Kanban,
       },
       {
         exact: true,

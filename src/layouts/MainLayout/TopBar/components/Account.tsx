@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import Divider from '@material-ui/core/Divider';
 
 // material icon
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -17,15 +18,15 @@ import { PATH_NAME } from 'configs';
 // actions
 import { logout } from 'actions/auth.action';
 
-// selctor
-import { userSelector } from 'selectors/auth.selector';
+// selectors
+import { roleSelector } from 'selectors/auth.selector';
 
 function Account({ ...classes }) {
   const { t: translate } = useTranslation();
   const dispatch = useDispatch();
   const history = useHistory();
+  const role = useSelector(roleSelector);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const user = useSelector(userSelector);
 
   const _handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -67,7 +68,9 @@ function Account({ ...classes }) {
         open={Boolean(anchorEl)}
         onClose={_handleClose}
       >
-        <MenuItem className={classes.menuProfile}>{user}</MenuItem>
+        <div className={classes.textRole}>{role}</div>
+        <Divider />
+        <MenuItem>My account</MenuItem>
         <MenuItem className={classes.menuProfile} onClick={_handleLogout}>
           {translate('LOGOUT')}
         </MenuItem>

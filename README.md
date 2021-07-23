@@ -1,14 +1,22 @@
 # React Boilerplate Material UI
 
 A simple react boilerplate apps built with React Typescript, redux and Material Ui.
- 
+
 ## Working application
 
 Check out the live application -> https://xenodochial-tereshkova-b7625c.netlify.app/
 
+### Login
+
 ![React Boilplate Demo](public/assets/images/lading-page1.png)
 
-![React Boilplate Overview](public/assets/images/lading-page2.png)
+### Dashboard
+
+![React Boilplate Overview](public/assets/images/lading-page.png)
+
+### Kanban
+
+![React Boilplate Overview](public/assets/images/kanban.png)
 
 ## Stack
 
