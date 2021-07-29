@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -11,6 +11,10 @@ import Button from '@material-ui/core/Button';
 import CardActions from '@material-ui/core/CardActions';
 import AddIcon from '@material-ui/icons/Add';
 
+import TaskViewModal from './components/TaskViewModal';
+import TaskEditModal from './components/TaskAddEditModal';
+
+// styles
 import useStyles from './styles';
 
 const news = [
@@ -43,22 +47,32 @@ const news = [
 
 function Kanban() {
   const classes = useStyles();
+  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenAddTask, setIsOpenAddTask] = useState(false);
+
+  function handleCloseDialog() {
+    setIsOpen(false);
+  }
+
+  function handleCloseDialogAddTask() {
+    setIsOpenAddTask(false);
+  }
 
   return (
     <div>
       <Grid container alignItems="center">
         <Grid item sm={8}>
-          <h2>Kanban</h2>
+          <h2>Kanban Board</h2>
         </Grid>
-        <Grid item sm={4} container justify="flex-end">
-          <Button variant="contained" color="primary" size="small" startIcon={<AddIcon />}>
-            Add Tasks
+        <Grid container item sm={4} justify="flex-end">
+          <Button variant="contained" color="primary" size="small" startIcon={<AddIcon />} onClick={() => setIsOpenAddTask(true)}>
+            Add Task
           </Button>
         </Grid>
       </Grid>
       <Paper variant="outlined">
         <Box m={2}>
-          <Grid container item xs={12} spacing={3}>
+          <Grid container item xs={12} spacing={3} className="m-0">
             <Grid item xs={4}>
               <Paper elevation={3}>
                 <Card>
@@ -74,6 +88,9 @@ function Kanban() {
                         <CardActions>
                           <Button size="small" color="primary">
                             Edit
+                          </Button>
+                          <Button size="small" color="primary" onClick={() => setIsOpen(true)}>
+                            View
                           </Button>
                           <Grid container justify="flex-end">
                             <Typography variant="body2" color="textSecondary" component="p">
@@ -103,6 +120,9 @@ function Kanban() {
                         <Button size="small" color="primary">
                           Edit
                         </Button>
+                        <Button size="small" color="primary" onClick={() => setIsOpen(true)}>
+                          View
+                        </Button>
                         <Grid container justify="flex-end">
                           <Typography variant="body2" color="textSecondary" component="p">
                             Tony Nguyen
@@ -130,6 +150,9 @@ function Kanban() {
                         <Button size="small" color="primary">
                           Edit
                         </Button>
+                        <Button size="small" color="primary" onClick={() => setIsOpen(true)}>
+                          View
+                        </Button>
                         <Grid container justify="flex-end">
                           <Typography variant="body2" color="textSecondary" component="p">
                             Tony Nguyen
@@ -148,6 +171,9 @@ function Kanban() {
                         <Button size="small" color="primary">
                           Edit
                         </Button>
+                        <Button size="small" color="primary" onClick={() => setIsOpen(true)}>
+                          View
+                        </Button>
                         <Grid container justify="flex-end">
                           <Typography variant="body2" color="textSecondary" component="p">
                             Tony Nguyen
@@ -162,6 +188,10 @@ function Kanban() {
           </Grid>
         </Box>
       </Paper>
+
+      <TaskViewModal isOpen={isOpen} handleCloseDialog={handleCloseDialog} />
+
+      <TaskEditModal isOpen={isOpenAddTask} handleCloseDialogAddTask={handleCloseDialogAddTask} />
     </div>
   );
 }
