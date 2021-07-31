@@ -1,8 +1,8 @@
 import React from 'react';
 import Chart from 'react-apexcharts';
+import { ApexOptions } from 'apexcharts';
 import clsx from 'clsx';
 
-import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -14,24 +14,10 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import Typography from '@material-ui/core/Typography';
+import Chip from '@material-ui/core/Chip';
 
-const useStyles = makeStyles((theme) => ({
-  table: {
-    width: '100%',
-  },
-  progressInprocess: {
-    '& div': {
-      backgroundColor: theme.palette.primary.main,
-    },
-  },
-  progressCompleted: {
-    '& div': {
-      backgroundColor: theme.palette.success.main,
-    },
-  },
-}));
+// styles
+import useCommonStyles from 'hooks/useCommonStyles';
 
 function createData(status: string, number: number) {
   return { status, number };
@@ -39,17 +25,17 @@ function createData(status: string, number: number) {
 
 const rows = [createData('Meat', 44), createData('Vegetable', 55), createData('Rice', 13)];
 
-function createDataTodo(title: string, author: string, progress: number, status: string) {
-  return { title, author, progress, status };
+function createDataTodo(title: string, author: string, severity: string, status: string) {
+  return { title, author, severity, status };
 }
 
 const todos = [
-  createDataTodo('Learn React', 'Tony Nguyen', 100, 'Completed'),
-  createDataTodo('Learn React', 'Tony Nguyen', 0, 'New'),
-  createDataTodo('Learn React', 'Tony Nguyen', 20, 'Inprocess'),
-  createDataTodo('Learn React', 'Tony Nguyen', 100, 'Completed'),
-  createDataTodo('Learn React', 'Tony Nguyen', 0, 'New'),
-  createDataTodo('Learn React', 'Tony Nguyen', 60, 'Inprocess'),
+  createDataTodo('Learn React', 'Tony Nguyen', 'low', 'completed'),
+  createDataTodo('Learn React', 'Tony Nguyen', 'medium', 'new'),
+  createDataTodo('Learn React', 'Tony Nguyen', 'high', 'inprocess'),
+  createDataTodo('Learn React', 'Tony Nguyen', 'high', 'completed'),
+  createDataTodo('Learn React', 'Tony Nguyen', 'medium', 'new'),
+  createDataTodo('Learn React', 'Tony Nguyen', 'medium', 'inprocess'),
 ];
 
 function createDataUser(email: string, role: string) {
@@ -69,7 +55,7 @@ const users = [
   createDataUser('david@gmail.com', 'Operator'),
 ];
 
-const options: any = {
+const options: ApexOptions = {
   chart: {
     type: 'pie',
   },
@@ -78,23 +64,8 @@ const options: any = {
 
 const series = [44, 55, 13];
 
-function LinearProgressWithLabel(props: any) {
-  return (
-    <Box display="flex" alignItems="center">
-      <Box width="100%" mr={1}>
-        <LinearProgress variant="determinate" {...props} />
-      </Box>
-      <Box minWidth={35}>
-        <Typography variant="body2" color="textSecondary">
-          {`${Math.round(props.value)}%`}
-        </Typography>
-      </Box>
-    </Box>
-  );
-}
-
 function Dashboard() {
-  const classes = useStyles();
+  const commonStyles = useCommonStyles();
 
   return (
     <div>
@@ -109,7 +80,7 @@ function Dashboard() {
               <Grid container justify="space-between">
                 <Grid item xs={12} sm={12} md={4}>
                   <TableContainer>
-                    <Table className={classes.table} aria-label="simple table">
+                    <Table aria-label="simple table">
                       <TableHead>
                         <TableRow>
                           <TableCell>Category</TableCell>
@@ -149,7 +120,7 @@ function Dashboard() {
                 <h2>Tasks</h2>
               </Grid>
               <TableContainer>
-                <Table className={classes.table} aria-label="simple table">
+                <Table aria-label="simple table">
                   <TableHead>
                     <TableRow>
                       <TableCell width="30%">Title</TableCell>
@@ -165,16 +136,26 @@ function Dashboard() {
                           {row.title}
                         </TableCell>
                         <TableCell>{row.author}</TableCell>
-                        <TableCell>
-                          <LinearProgressWithLabel
+                        <TableCell width="15%">
+                          <Chip
                             className={clsx(
-                              row.progress > 0 && row.progress < 99 && classes.progressInprocess,
-                              row.progress === 100 && classes.progressCompleted,
+                              commonStyles.textCapitalize,
+                              row.severity === 'low' && commonStyles.chipLow,
+                              row.severity === 'medium' && commonStyles.chipMedium,
+                              row.severity === 'high' && commonStyles.chipHigh,
                             )}
-                            value={row.progress}
+                            label={row.severity}
                           />
                         </TableCell>
-                        <TableCell>{row.status}</TableCell>
+                        <TableCell
+                          className={clsx(
+                            commonStyles.textCapitalize,
+                            row.status === 'completed' && commonStyles.colorTextCompleted,
+                            row.status === 'inprocess' && commonStyles.colorTextInprocess,
+                          )}
+                        >
+                          {row.status}
+                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -190,7 +171,7 @@ function Dashboard() {
                 <h2>Users</h2>
               </Grid>
               <TableContainer>
-                <Table className={classes.table} aria-label="simple table">
+                <Table aria-label="simple table">
                   <TableHead>
                     <TableRow>
                       <TableCell>Email</TableCell>
