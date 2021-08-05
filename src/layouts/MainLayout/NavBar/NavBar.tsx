@@ -28,6 +28,7 @@ type IChildRoutes = {
   curr: any;
   pathname: string;
   depth?: number;
+  label?: string;
 };
 
 function NavBar({ isDrawer }: IProps) {
@@ -55,6 +56,7 @@ function NavBar({ isDrawer }: IProps) {
           open={Boolean(open)}
           title={curr.title}
           href={curr.href}
+          label={curr.label}
           isExternalLink={curr.isExternalLink}
         >
           {renderNavItems({
@@ -72,11 +74,26 @@ function NavBar({ isDrawer }: IProps) {
           href={curr.href}
           icon={curr.icon}
           title={curr.title}
+          label={curr.label}
           isExternalLink={curr.isExternalLink}
         />,
       );
     }
     return acc;
+  };
+
+  const renderNavbarCommon = (navbars: any) => {
+    return (
+      <>
+        {navbars.map((nav: any) => {
+          return (
+            <List key={nav.subheader} subheader={<ListSubheader disableSticky>{nav.subheader}</ListSubheader>}>
+              {renderNavItems({ items: nav.items, pathname: location.pathname })}
+            </List>
+          );
+        })}
+      </>
+    );
   };
 
   return (
@@ -96,13 +113,8 @@ function NavBar({ isDrawer }: IProps) {
         </Link>
       </div>
       <Divider />
-      {navBarCommon.map((nav) => {
-        return (
-          <List key={nav.subheader} subheader={<ListSubheader disableSticky>{nav.subheader}</ListSubheader>}>
-            {renderNavItems({ items: nav.items, pathname: location.pathname })}
-          </List>
-        );
-      })}
+
+      {renderNavbarCommon(navBarCommon)}
     </Drawer>
   );
 }

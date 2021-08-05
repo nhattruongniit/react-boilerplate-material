@@ -7,16 +7,26 @@ import Button from '@material-ui/core/Button';
 import ListItem from '@material-ui/core/ListItem';
 import Link from '@material-ui/core/Link';
 
+// types
+import { canAction } from 'helpers';
+
 // components
 import { INavBarItem } from 'models/INavBar';
 import NavBarExpandItem from './NavBarExpandItem';
 
-// types
-
 // styles
 import useStyles from './styles';
 
-const NavBarItem: FC<INavBarItem> = ({ depth, icon: Icon, title, open: openProp, href, isExternalLink = false, children }) => {
+const NavBarItem: FC<INavBarItem> = ({
+  depth,
+  icon: Icon,
+  title,
+  open: openProp,
+  href,
+  label,
+  isExternalLink = false,
+  children,
+}) => {
   const classes = useStyles();
 
   let paddingLeft = 24;
@@ -36,24 +46,28 @@ const NavBarItem: FC<INavBarItem> = ({ depth, icon: Icon, title, open: openProp,
 
   return (
     <ListItem className={clsx(classes.itemLeaf)} disableGutters key={title}>
-      {isExternalLink ? (
-        <Link href={href} target="_blank" style={style} className={clsx(classes.buttonLeaf, `depth-${depth}`)}>
-          {Icon && <Icon className={classes.icon} size="20" />}
-          <span className={classes.title}>{title}</span>
-        </Link>
-      ) : (
-        <Button
-          activeClassName={classes.active}
-          className={clsx(classes.buttonLeaf, `depth-${depth}`)}
-          component={RouterLink}
-          exact
-          style={style}
-          to={href}
-        >
-          {Icon && <Icon className={classes.icon} size="20" />}
-          <span className={classes.title}>{title}</span>
-        </Button>
-      )}
+      {canAction('view', label || '') ? (
+        <>
+          {isExternalLink ? (
+            <Link href={href} target="_blank" style={style} className={clsx(classes.buttonLeaf, `depth-${depth}`)}>
+              {Icon && <Icon className={classes.icon} size="20" />}
+              <span className={classes.title}>{title}</span>
+            </Link>
+          ) : (
+            <Button
+              activeClassName={classes.active}
+              className={clsx(classes.buttonLeaf, `depth-${depth}`)}
+              component={RouterLink}
+              exact
+              style={style}
+              to={href}
+            >
+              {Icon && <Icon className={classes.icon} size="20" />}
+              <span className={classes.title}>{title}</span>
+            </Button>
+          )}
+        </>
+      ) : null}
     </ListItem>
   );
 };

@@ -7,8 +7,8 @@ import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 
-// paths name
-import { PATH_NAME } from 'configs';
+// configs
+import { PATH_NAME, DRAWER_MENU_LABEL } from 'configs';
 
 export const navBarCommon = [
   {
@@ -18,11 +18,13 @@ export const navBarCommon = [
         title: 'Report',
         href: PATH_NAME.DASHBOARD,
         icon: DashboardIcon,
+        label: DRAWER_MENU_LABEL.DASHBOARD,
       },
       {
         title: 'Playbackground',
         href: PATH_NAME.PLAY_BACKGROUND,
         icon: SportsEsportsIcon,
+        label: DRAWER_MENU_LABEL.PLAY_BACKGROUND,
       },
     ],
   },
@@ -33,16 +35,19 @@ export const navBarCommon = [
         title: 'Product',
         icon: ShopIcon,
         href: PATH_NAME.PRODUCT,
+        label: DRAWER_MENU_LABEL.PRODUCT,
         items: [
           {
             title: 'Add Product',
             icon: AddIcon,
             href: PATH_NAME.PRODUCT_ADD,
+            label: DRAWER_MENU_LABEL.PRODUCT_ADD,
           },
           {
             title: 'List Product',
             icon: ViewListIcon,
             href: PATH_NAME.PRODUCT_LIST,
+            label: DRAWER_MENU_LABEL.PRODUCT_LIST,
           },
         ],
       },
@@ -50,6 +55,7 @@ export const navBarCommon = [
         title: 'Kanban',
         href: PATH_NAME.KANBAN,
         icon: AssessmentIcon,
+        label: DRAWER_MENU_LABEL.KANBAN,
       },
     ],
   },
@@ -60,6 +66,7 @@ export const navBarCommon = [
         title: 'Users',
         icon: PeopleIcon,
         href: PATH_NAME.USERS,
+        label: DRAWER_MENU_LABEL.USERS,
       },
     ],
   },

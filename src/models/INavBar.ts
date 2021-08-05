@@ -12,6 +12,7 @@ type IStyle = {
 export type IChildNavBar = IITems & {
   items?: IITems[];
   pathname: string;
+  label?: string;
 };
 
 export type INavBarCommon = {
@@ -25,6 +26,7 @@ export type INavBarItem = {
   title: string;
   open?: boolean;
   href: string;
+  label?: string;
   isExternalLink: boolean;
   children?: any;
 };

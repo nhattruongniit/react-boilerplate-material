@@ -21,7 +21,7 @@ const RoleRoute: FC<IProps> = ({ children, requireRoles = [] }) => {
 
     const checkRole = requireRoles.includes(role);
     if (!checkRole) {
-      history.replace(PATH_NAME.PLAY_BACKGROUND);
+      history.replace(PATH_NAME.ERROR_403);
     }
   }, [history, role, requireRoles]);
 

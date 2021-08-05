@@ -19,6 +19,7 @@ import RoleRoute from './RoleRoute';
 
 // modules
 const Error404View = lazy(() => import('features/Error404View'));
+const DenyView = lazy(() => import('features/DenyView'));
 const ProductAdd = lazy(() => import('features/Product/ProductAdd'));
 const ProductList = lazy(() => import('features/Product/ProductList'));
 const Users = lazy(() => import('features/Users'));
@@ -45,6 +46,11 @@ const routesConfig: IRoutes[] = [
     component: Login,
   },
   {
+    exact: true,
+    path: PATH_NAME.ERROR_403,
+    component: DenyView,
+  },
+  {
     path: '/',
     guard: AuthGuard,
     layout: MainLayout,
@@ -53,7 +59,7 @@ const routesConfig: IRoutes[] = [
         exact: true,
         path: PATH_NAME.DASHBOARD,
         component: Dashboard,
-        requireRoles: [USER_ROLE.ADMIN],
+        requireRoles: [USER_ROLE.ADMIN, USER_ROLE.LEAD],
       },
       {
         exact: true,
@@ -65,7 +71,7 @@ const routesConfig: IRoutes[] = [
         exact: true,
         path: PATH_NAME.PRODUCT_LIST,
         component: ProductList,
-        requireRoles: [USER_ROLE.ADMIN],
+        requireRoles: [USER_ROLE.ADMIN, USER_ROLE.LEAD],
       },
       {
         exact: true,
@@ -77,6 +83,7 @@ const routesConfig: IRoutes[] = [
         exact: true,
         path: PATH_NAME.KANBAN,
         component: Kanban,
+        requireRoles: [USER_ROLE.ADMIN, USER_ROLE.LEAD],
       },
       {
         exact: true,

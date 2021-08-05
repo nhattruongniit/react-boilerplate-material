@@ -42,7 +42,7 @@ class AuthService {
         if (userRole && userRole === 'GUEST') {
           localStorage.removeItem(process.env.REACT_APP_KEY_TOKEN);
           localStorage.removeItem(process.env.REACT_APP_KEY_EXPIRED_DATE);
-          window.location.replace(PATH_NAME.ERROR_404);
+          window.location.replace(PATH_NAME.ERROR_403);
           return;
         }
         window.location.replace(PATH_NAME.ROOT);
