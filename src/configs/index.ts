@@ -12,4 +12,9 @@ export const LANGUAGE = {
   VIETNAMESE: 'vn',
 };
 
-export { PATH_NAME, USER_ROLE, DRAWER_MENU_LABEL };
+const VERSION_PROJECT = {
+  // eslint-disable-next-line global-require
+  version: require('../../package.json').version,
+};
+
+export { PATH_NAME, USER_ROLE, DRAWER_MENU_LABEL, VERSION_PROJECT };

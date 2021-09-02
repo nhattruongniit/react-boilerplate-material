@@ -79,9 +79,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   navBar_link: {
     color: 'inherit',
     display: 'flex',
-    alignItems: 'center',
     justifyContent: 'center',
     textDecoration: 'none',
+  },
+  version: {
+    fontSize: 12,
   },
 }));
 
