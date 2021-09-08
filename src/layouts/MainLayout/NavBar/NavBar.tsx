@@ -10,7 +10,7 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 
 // configs
 import { navBarCommon } from 'routes/navBarCommon';
-import { PATH_NAME } from 'configs';
+import { PATH_NAME, VERSION_PROJECT } from 'configs';
 
 // types
 import { IChildNavBar } from 'models/INavBar';
@@ -109,7 +109,10 @@ function NavBar({ isDrawer }: IProps) {
       <div className={classes.drawerHeader}>
         <Link to={PATH_NAME.ROOT} className={classes.navBar_link}>
           <img src="/assets/images/logo.png" alt="Logo" title="logo" />
-          Material UI
+          <div>
+            Material UI <br />
+            <span className={classes.version}>v.{VERSION_PROJECT.version}</span>
+          </div>
         </Link>
       </div>
       <Divider />

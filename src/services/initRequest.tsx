@@ -13,6 +13,11 @@ type IAxiosResponse = AxiosError & {
   };
 };
 
+function getAccessToken() {
+  const accessToken = window.localStorage.getItem('accessToken');
+  return accessToken;
+}
+
 const requestConfig: IConfig = {
   baseURL: process.env.REACT_APP_ENDPOINT_URL,
   timeout: 5000,
@@ -37,6 +42,13 @@ export default function initRequest(store: any) {
         requestCount += 1;
         store.dispatch(setLoading(true));
       }
+
+      // add x-auth-token
+      const accessToken = getAccessToken();
+      if (accessToken) {
+        config.headers['x-auth-token'] = accessToken;
+      }
+
       return config;
     },
     (error: IAxiosResponse) => {
@@ -58,6 +70,37 @@ export default function initRequest(store: any) {
       if (error && error.config.showSpinner) {
         decreaseRequestCount();
         store.dispatch(setDialog(true));
+      }
+
+      // access token expired
+      // if(error.response.status === 401 && error.config._retry) {
+      //   error.config._retry = true;
+      //   try {
+      //     const result = await instance.post("/auth/refreshtoken", {
+      //       refreshToken: 'xxx'
+      //     });
+      //     window.localStorage.setItem("accessToken", result.data.accessToken);
+      //     instance.defaults.headers.common["x-access-token"] =  result.data.accessToken;
+
+      //     return instance(error.config);
+      //   } catch (err) {
+      //     if (err.response && err.response.data) {
+      //       return Promise.reject(err.response.data);
+      //     }
+      //     return Promise.reject(err);
+      //   }
+      // }
+
+      // handle errors
+      switch (error.response?.status) {
+        case 400: {
+          break;
+        }
+        case 500: {
+          break;
+        }
+        default:
+          break;
       }
       return Promise.reject(error);
     },
