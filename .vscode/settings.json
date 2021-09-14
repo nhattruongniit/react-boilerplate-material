@@ -1,11 +1,15 @@
 {
-    "files.associations": {
-      "*.jsx": "javascriptreact"
-    },
-    "editor.insertSpaces": true,
-    "editor.detectIndentation": true,
-    "editor.formatOnSave": true,
-    "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true
-    }
-  }
+  "files.associations": {
+    "*.jsx": "javascriptreact"
+  },
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": true,
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "eslint.alwaysShowStatus": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}
