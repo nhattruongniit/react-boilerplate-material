@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-bind */
 import React, { useState } from 'react';
 import clsx from 'clsx';
 import Paper from '@material-ui/core/Paper';

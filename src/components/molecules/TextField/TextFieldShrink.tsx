@@ -9,7 +9,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 import HelpIcon from '@material-ui/icons/Help';
 
 // styles
-import TypographyBase from 'components/atoms/TypographyBase';
 import useStyles from './styles';
 
 const CustomToolTip = withStyles((theme: Theme) => ({
