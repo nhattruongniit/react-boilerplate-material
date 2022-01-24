@@ -52,7 +52,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint --ext .ts,.tsx src --color",
-    "format": "prettier --write src/**/*.{ts,tsx}",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
     "isready": "npm run format && npm run lint && npm run build",
     "docker": "docker build -t react-docker .",
     "react-docker": "docker run -p 3000:80 react-docker",

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-bind */
 import React, { useState, useEffect, useCallback, FC } from 'react';
 
 // libs

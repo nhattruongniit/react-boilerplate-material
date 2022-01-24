@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosError } from 'axios';
 
 // actions
-import { setLoading, setDialog } from 'actions/app.action';
+import { setLoading } from 'actions/app.action';
 
 export type IConfig = AxiosRequestConfig & {
   showSpinner?: boolean;
@@ -79,9 +79,13 @@ export default function initRequest(store: any) {
       return res;
     },
     (error: IAxiosResponse) => {
-      if (error && error.config.showSpinner) {
+      if ((error && error.config.showSpinner) || error.code === 'ECONNABORTED') {
         decreaseRequestCount();
-        store.dispatch(setDialog(true));
+      }
+
+      // handle request timeout
+      if (error.code === 'ECONNABORTED') {
+        store.dispatch(setLoading(false));
       }
 
       // access token expired
