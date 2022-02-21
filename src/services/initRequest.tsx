@@ -46,7 +46,8 @@ export default function initRequest(store: any) {
       // add x-auth-token
       const accessToken = getAccessToken();
       if (accessToken) {
-        config.headers['x-auth-token'] = accessToken;
+        // config.headers['x-auth-token'] = accessToken;
+        config.headers.Authorization = `Bearer ${accessToken}`;
       }
 
       return config;
@@ -84,7 +85,8 @@ export default function initRequest(store: any) {
       //       refreshToken: 'xxx'
       //     });
       //     window.localStorage.setItem("accessToken", result.data.accessToken);
-      //     instance.defaults.headers.common["x-access-token"] =  result.data.accessToken;
+      //     axiosInstance.defaults.headers.common["x-access-token"] =  result.data.accessToken; (option 1)
+      //     axiosInstance.defaults.headers.common.Authorization = `Bearer ${result.data.accessToken}`; (option 2)
 
       //     return instance(error.config);
       //   } catch (err) {
