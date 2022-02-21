@@ -26,6 +26,9 @@ const requestConfig: IConfig = {
 
 export const axiosInstance = axios.create(requestConfig);
 
+const { CancelToken } = axios;
+let cancel: any = null;
+
 export default function initRequest(store: any) {
   let requestCount = 0;
 
@@ -38,6 +41,15 @@ export default function initRequest(store: any) {
 
   axiosInstance.interceptors.request.use(
     (config: IConfig) => {
+      // cancel token
+      if (cancel) {
+        cancel(); // cancel request
+      }
+      config.cancelToken = new CancelToken(function executor(c) {
+        cancel = c;
+      });
+
+      // show loading
       if (config.showSpinner) {
         requestCount += 1;
         store.dispatch(setLoading(true));
