@@ -6,6 +6,8 @@ const initialState: IAuthState = {
 };
 
 const reducer = (state = initialState, { type, payload }: IAuthActionCreator) => {
+  console.log('auth reducer: ', { type, payload });
+
   switch (type) {
     case IAuthActionTypes.LOGIN_SUCCESS:
       return {

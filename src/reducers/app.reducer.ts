@@ -11,6 +11,7 @@ const initialState: IAppState = {
 };
 
 const reducer = (state = initialState, { type, payload }: IAppActionCreator) => {
+  console.log('app reducer: ', { type, payload });
   switch (type) {
     case IAppActionTypes.SET_LOADING:
       return {
