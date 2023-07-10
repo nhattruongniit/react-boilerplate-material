@@ -65,7 +65,7 @@ Check out the live application -> https://xenodochial-tereshkova-b7625c.netlify.
 - prettier
 - husky
 - lint-staged
-- conventional commit
+- conventional commit (https://www.youtube.com/watch?v=jNxDNoYEGVU)
 
 ## Git replacing LF with CRLF
 
