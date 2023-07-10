@@ -56,7 +56,8 @@
     "isready": "npm run format && npm run lint && npm run build",
     "docker": "docker build -t react-docker .",
     "react-docker": "docker run -p 3000:80 react-docker",
-    "analyze": "source-map-explorer 'build/static/js/*.js'"
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "husky-install": "husky install & npx husky add .husky/pre-commit 'yarn run lint-staged' & npx husky add .husky/commit-msg  'pre-received' "
   },
   "eslintConfig": {
     "extends": [
