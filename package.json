@@ -110,13 +110,6 @@
     "prettier-eslint-cli": "^5.0.0",
     "pretty-quick": "^3.1.0"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": [
-        "lint-staged"
-      ]
-    }
-  },
   "lint-staged": {
     "*.{ts,tsx}": [
       "npm run lint",
