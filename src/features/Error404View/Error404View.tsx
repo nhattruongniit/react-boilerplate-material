@@ -32,6 +32,7 @@ function Error404View() {
         <Typography align="center" variant="subtitle2" color="textSecondary">
           Sorry, page not found
         </Typography>
+        {/* @ts-ignore */}
         <Box mt={6} display="flex" justifyContent="center">
           <Button color="secondary" component={RouterLink} to="/" variant="outlined">
             Back to home

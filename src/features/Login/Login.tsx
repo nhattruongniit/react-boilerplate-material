@@ -48,7 +48,7 @@ export default function SignIn() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
-  const [name, setName] = useState('tonynguyen');
+  const [name, setName] = useState('tony@gmail.com');
   const [role, setRole] = useState('ADMIN');
 
   const _onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -72,10 +72,10 @@ export default function SignIn() {
             margin="normal"
             required
             fullWidth
-            id="name"
-            label="User Name"
-            name="name"
-            autoComplete="name"
+            id="email"
+            label="Email"
+            name="email"
+            autoComplete="email"
             autoFocus
             value={name}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}

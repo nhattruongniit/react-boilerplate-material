@@ -11,6 +11,10 @@ class HttpRequest {
   async get(url: string, config?: IConfig) {
     return this.api.get(url, config);
   }
+
+  async post(url: string, config?: IConfig) {
+    return this.api.post(url, config);
+  }
 }
 
 const httpRequest = new HttpRequest();

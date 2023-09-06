@@ -72,6 +72,7 @@ function Kanban() {
         </Grid>
       </Grid>
       <Paper variant="outlined">
+        {/* @ts-ignore */}
         <Box m={2}>
           <Grid container item xs={12} spacing={3} className="m-0">
             <Grid item xs={4}>

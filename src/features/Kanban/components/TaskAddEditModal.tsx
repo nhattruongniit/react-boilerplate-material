@@ -53,6 +53,7 @@ export default function TaskEditModal({ isOpen, handleCloseDialogAddTask }: IPro
               </FormControl>
             </Grid>
           </Grid>
+          {/* @ts-ignore */}
           <Box mt={2}>
             <Typography variant="subtitle1" color="textPrimary">
               Description

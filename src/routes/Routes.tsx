@@ -115,6 +115,7 @@ const renderRoutes = (routes: IRoutes[]) => {
   return (
     <>
       {routes ? (
+        // @ts-ignore
         <Suspense fallback={<div />}>
           <Switch>
             {routes.map((route: IRoutes, idx: number) => {
@@ -129,7 +130,9 @@ const renderRoutes = (routes: IRoutes[]) => {
                   path={route.path}
                   exact={route.exact}
                   render={(props: any) => (
+                    // @ts-ignore
                     <Guard>
+                      {/* @ts-ignore */}
                       <Layout>
                         {route.routes ? (
                           renderRoutes(route.routes)

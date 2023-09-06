@@ -52,6 +52,7 @@ function DenyView() {
             <Typography align="center" variant="h3" className={classes.desc}>
               Sorry, access denied. Please contact admin to verify and update your role.
             </Typography>
+            {/* @ts-ignore */}
             <Box mt={2} display="flex" justifyContent="center">
               <Button color="primary" variant="contained" onClick={_handleLogout}>
                 LOGOUT

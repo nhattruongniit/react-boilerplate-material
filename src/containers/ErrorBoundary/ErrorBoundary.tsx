@@ -68,6 +68,7 @@ const DefaultPage: FC = ({ children }) => {
   }
 
   return (
+    // @ts-ignore
     <ErrorBoundary
       resetKeys={[boundaryKey]}
       FallbackComponent={ErrorFallbackUI}

@@ -2,6 +2,7 @@ import axios, { AxiosRequestConfig, AxiosError } from 'axios';
 
 // actions
 import { setLoading } from 'actions/app.action';
+import httpRequest from './httpRequest';
 
 export type IConfig = AxiosRequestConfig & {
   showSpinner?: boolean;
@@ -58,8 +59,8 @@ export default function initRequest(store: any) {
       // add x-auth-token
       const accessToken = getAccessToken();
       if (accessToken) {
-        // config.headers['x-auth-token'] = accessToken;
-        config.headers.Authorization = `Bearer ${accessToken}`;
+        config.headers['x-auth-token'] = accessToken;
+        // config.headers.Authorization = `Bearer ${accessToken}`;
       }
 
       return config;
@@ -79,10 +80,12 @@ export default function initRequest(store: any) {
       }
       return res;
     },
-    (error: IAxiosResponse) => {
+    async (error: IAxiosResponse) => {
       if ((error && error.config.showSpinner) || error.code === 'ECONNABORTED') {
         decreaseRequestCount();
       }
+
+      console.log('axiosInstance.interceptors.response.', error.response);
 
       // handle request timeout
       if (error.code === 'ECONNABORTED') {
@@ -90,24 +93,27 @@ export default function initRequest(store: any) {
       }
 
       // access token expired
-      // if(error.response.status === 401 && error.config._retry) {
-      //   error.config._retry = true;
-      //   try {
-      //     const result = await instance.post("/auth/refreshtoken", {
-      //       refreshToken: 'xxx'
-      //     });
-      //     window.localStorage.setItem("accessToken", result.data.accessToken);
-      //     axiosInstance.defaults.headers.common["x-access-token"] =  result.data.accessToken; (option 1)
-      //     axiosInstance.defaults.headers.common.Authorization = `Bearer ${result.data.accessToken}`; (option 2)
+      if (error.response?.status === 401) {
+        // error.config._retry = true;
+        try {
+          const result = await axiosInstance.post('/api/user/refresh-token', {
+            data: {
+              refresh_token: window.localStorage.getItem('refreshToken'),
+            },
+          });
 
-      //     return instance(error.config);
-      //   } catch (err) {
-      //     if (err.response && err.response.data) {
-      //       return Promise.reject(err.response.data);
-      //     }
-      //     return Promise.reject(err);
-      //   }
-      // }
+          window.localStorage.setItem('accessToken', result.data.data.access_token);
+          axiosInstance.defaults.headers.common['x-auth-token'] = result.data.data.access_token; // (option 1)
+          // axiosInstance.defaults.headers.common.Authorization = `Bearer ${result.data.accessToken}`; // (option 2)
+
+          return await axiosInstance(error.config);
+        } catch (err: any) {
+          if (err.response && err.response.data) {
+            return Promise.reject(err.response.data);
+          }
+          return Promise.reject(err);
+        }
+      }
 
       // handle errors
       switch (error.response?.status) {

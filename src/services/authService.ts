@@ -1,3 +1,5 @@
+import httpRequest from './httpRequest';
+
 class AuthService {
   handleAuthentication = () => {
     const accessToken = this.getAccessToken();
@@ -6,8 +8,14 @@ class AuthService {
   };
 
   loginWithAuth0 = async (username: string, roleUser: string) => {
-    const accessToken = '1929312831903129321';
-    this.setSession('accessToken', accessToken);
+    const data = await httpRequest.post('/api/user/login', {
+      data: {
+        email: 'tony@gmail.com',
+        password: '123456',
+      },
+    });
+    this.setSession('accessToken', data.data.data.access_token);
+    this.setSession('refreshToken', data.data.data.refresh_token);
     const userStringify = JSON.stringify({ username, roleUser });
     this.setSession('user', userStringify);
     return {

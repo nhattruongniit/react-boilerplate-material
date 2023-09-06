@@ -71,6 +71,7 @@ const TextFieldController = ({
             {showRequiredLabel && <span className={classes.textError}>*</span>}
             <span>{title}</span>
             {showTooltip && (
+              // @ts-ignore
               <CustomToolTip title={titleTooltip} placement={placement}>
                 <HelpIcon />
               </CustomToolTip>

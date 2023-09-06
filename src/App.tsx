@@ -35,9 +35,11 @@ function App() {
   }, [language, i18n]);
 
   return (
+    // @ts-ignore
     <MuiThemeProvider theme={themes(type)}>
       <Router>
         <Auth>
+          {/* @ts-ignore */}
           <SnackbarProvider
             autoHideDuration={process.env.REACT_APP_AUTO_HIDE_SNACKBAR || 3000}
             anchorOrigin={{

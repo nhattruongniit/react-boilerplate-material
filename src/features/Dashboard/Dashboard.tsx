@@ -73,6 +73,7 @@ function Dashboard() {
       <Grid container>
         <Grid item xs={12}>
           <Paper>
+            {/* @ts-ignore */}
             <Box m={2}>
               <Grid container item xs={12}>
                 <h2>Products</h2>
@@ -104,6 +105,7 @@ function Dashboard() {
                   <div>
                     <FormControlLabel control={<Checkbox size="small" name="legend" color="primary" />} label="Legend" />
                     <br />
+                    {/* @ts-ignore */}
                     <Chart options={options} series={series} type="pie" width={500} />
                   </div>
                 </Grid>
@@ -115,6 +117,7 @@ function Dashboard() {
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12} md={7}>
           <Paper>
+            {/* @ts-ignore */}
             <Box m={2}>
               <Grid container item xs={12}>
                 <h2>Tasks</h2>
@@ -166,6 +169,7 @@ function Dashboard() {
         </Grid>
         <Grid item xs={12} sm={12} md={5}>
           <Paper>
+            {/* @ts-ignore */}
             <Box m={2}>
               <Grid container item xs={12}>
                 <h2>Users</h2>

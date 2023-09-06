@@ -50,18 +50,21 @@ export default function TaskViewModal({ isOpen, handleCloseDialog }: IProps) {
           </Grid>
         </DialogTitle>
         <DialogContent>
+          {/* @ts-ignore */}
           <Box m={1}>
             <Typography component="div">Severity</Typography>
             <Typography variant="body2" color="textSecondary">
               Low
             </Typography>
           </Box>
+          {/* @ts-ignore */}
           <Box m={1}>
             <Typography>Status</Typography>
             <Typography variant="body2" color="textSecondary">
               New
             </Typography>
           </Box>
+          {/* @ts-ignore */}
           <Box m={1}>
             <Typography>Description</Typography>
             <Typography variant="body2" color="textSecondary">
