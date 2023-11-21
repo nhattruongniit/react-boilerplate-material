@@ -1,0 +1,19 @@
+stages:
+  - build
+
+build:
+  only:
+    - master
+  stage: build
+  image: node:16-alpine
+  environment:
+    name: develop
+  before_script:
+    - node -v
+    - npm i -g firebase-tools
+  script:
+    - npm install
+    - mkdir build
+    - npm run build
+    - firebase use tony-123456
+    - firebase deploy --only hosting:dev --token $FIREBASE_TOKEN
