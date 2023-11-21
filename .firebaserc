@@ -1,0 +1,21 @@
+{
+  "projects": {
+    "default": "tony-12345"
+  },
+  "targets": {
+    "tony-12345": {
+      "hosting": {
+        "dev": [
+          "boilerplate-dev"
+        ],
+        "uat": [
+          "boilerplate-uat"
+        ],
+        "production": [
+          "boilerplate"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
