@@ -1,7 +1,7 @@
 stages:
   - build
 
-build:
+build_token:
   only:
     - master
   stage: build
@@ -29,6 +29,7 @@ build_serivce_account:
   before_script:
     - node -v
     - npm i -g firebase-tools
+    - cat $ENV_FILE > .env
     - export GOOGLE_APPLICATION_CREDENTIALS=$SERVICE_ACCOUNT_TONY
   script:
     - npm install --legacy-peer-deps
