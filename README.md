@@ -107,6 +107,9 @@ Adding in the settings.json file & create .vscode/settings.json in root project
 ## Installation
 
 ```bash
+# install husky
+$ yarn run husky-install
+
 # install node version
 Please install at least v15.2.0 version node
 
