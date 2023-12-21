@@ -1,5 +1,5 @@
 #!/bin/sh
-if ! head -1 "$1" | grep -qE "(\[TONY-[0-9]{4}\])( )(feat|fix|chore|docs|test|style|refactor|perf|build|ci|revert)(\(.+?\))?:.{1,}$"; then
+if ! head -1 "$1" | grep -qE "(\[TONY-[0-9]{1,10}\])( )(feat|fix|chore|docs|test|style|refactor|perf|build|ci|revert)(\(.+?\))?:.{1,}$"; then
     echo "Aborting commit. Your commit message is invalid. Format: [TONY-0000] feat: description" >&2
     exit 1
 fi
