@@ -1,0 +1,34 @@
+import { Suspense, useLayoutEffect, useRef, useState } from 'react';
+
+function ScrollToLoad({ children, offset = 150 }) {
+    const [isVisible, setIsVisible] = useState(false);
+    const elementRef = useRef(null);
+
+    const checkIfInView = () => {
+        if (elementRef.current) {
+            const rect = elementRef.current.getBoundingClientRect();
+            const inView = rect.top <= window.innerHeight + offset;
+            if (inView) {
+                setIsVisible(true);
+                window.removeEventListener('scroll', checkIfInView);
+            }
+        }
+    };
+
+    useLayoutEffect(() => {
+        checkIfInView();
+        window.addEventListener('scroll', checkIfInView);
+        return () => window.removeEventListener('scroll', checkIfInView);
+    }, []);
+
+    return <div ref={elementRef}>{isVisible && <Suspense fallback={<></>}>{children}</Suspense>}</div>;
+}
+
+export default ScrollToLoad;
+
+
+/* using
+<ScrollToLoad>
+  <Component />
+</ScrollToLoad>
+*/
