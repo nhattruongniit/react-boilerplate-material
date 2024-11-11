@@ -1,6 +1,11 @@
 import { Suspense, useLayoutEffect, useRef, useState } from 'react';
 
-function ScrollToLoad({ children, offset = 150 }) {
+type IProps = {
+    children: React.ReactNode,
+    offer: number
+}
+
+function ScrollToLoad({ children, offset = 150 }: IProps) {
     const [isVisible, setIsVisible] = useState(false);
     const elementRef = useRef(null);
 
