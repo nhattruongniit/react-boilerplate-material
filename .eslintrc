@@ -62,6 +62,19 @@
     "@typescript-eslint/naming-convention": "off",
     "import/no-cycle": "off",
     "@typescript-eslint/no-shadow": "off",
-    "@typescript-eslint/indent": "off"
+    "@typescript-eslint/indent": "off",
+    "simple-import-sort/imports": [
+          "warn",
+          {
+              groups: [
+                  // All external libraries (anything not starting with . or @)
+                  ["^[^.@]"],
+                  // All internal imports (starting with @)
+                  ["^@"],
+                  // Relative imports (starting with . or ..)
+                  ["^[./]"],
+              ],
+          },
+      ],
   }
 }
