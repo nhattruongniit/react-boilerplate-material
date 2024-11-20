@@ -10,15 +10,11 @@ gulp.task('move-css-to-body', () => {
     return gulp.src(paths.html)
         .pipe(
             cheerio(($) => {
+                const noscriptTag = $('#deferred-styles');
                 $('link[rel="stylesheet"]').each((_, link) => {
-                    // // Remove the <link> from <head>
-                    // const $link = $(link).remove();
-                    // // Append it to the <body>
-                    // $('body').append($link);
-
                     const $link = $(link).remove();
-                    const preloadLink = $link.clone().attr('rel', 'preload').attr('as', 'style');
-                    $('body').append(preloadLink);  
+                    const preloadLink = $link.clone().attr('rel', 'stylesheet preload').attr('as', 'stylesheetstyle');
+                    noscriptTag.append(preloadLink);
                 });
                 $('script[src]').each((_, script) => {
                     $(script).attr('defer', 'defer');
