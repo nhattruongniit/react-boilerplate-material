@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { proxyConfiguration } from './setupProxy';
 
-const vendorJsonPath = path.resolve(__dirname, './tools/getVendor/vendor.json');
+const vendorJsonPath = path.resolve(__dirname, './vendor.json');
 let vendorJson = {};
 
 if (fs.existsSync(vendorJsonPath)) {
