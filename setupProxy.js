@@ -22,7 +22,7 @@ export const proxyConfiguration = {
         changeOrigin: true,
         rewrite: (path) => (enableLiveEnviroment.css ? path : path.replace(/^\/vendor-css\/css/, `/css/${vendorCode}`)),
     },
-    '/public/html/games': {
+    '/public/html/app': {
         target: domain,
         changeOrigin: true,
         rewrite: (path) => path,
